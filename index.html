@@ -3,22 +3,23 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-<title>Sistema Rent a Car Pro</title>
+<title>Rent a Car Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{
-  --bg:#0a0a0f;--bg2:#0f0f1a;--bg3:#13131f;--bg4:#1a1a2e;
-  --card:rgba(255,255,255,0.04);--card-h:rgba(255,255,255,0.07);
-  --border:rgba(255,255,255,0.08);--border-b:rgba(139,92,246,0.35);
-  --t1:#f0f0ff;--t2:#8888aa;--t3:#555577;
-  --p:#8b5cf6;--blue:#3b82f6;--cyan:#06b6d4;
-  --green:#10b981;--red:#ef4444;--yellow:#f59e0b;--orange:#f97316;
-  --gp:linear-gradient(135deg,#8b5cf6,#3b82f6);
-  --gc:linear-gradient(145deg,rgba(139,92,246,.12),rgba(59,130,246,.06));
-  --glow:0 0 30px rgba(139,92,246,.25);
-  --nav:68px;--r1:10px;--r2:16px;--r3:22px;--r4:30px;
+  --bg:#F5F7FA;--bg2:#FFFFFF;--bg3:#F0F2F5;--bg4:#E8ECF0;
+  --card:#FFFFFF;--card-h:#F8FAFC;
+  --border:#E5E7EB;--border-b:rgba(37,99,235,.25);
+  --t1:#111827;--t2:#6B7280;--t3:#9CA3AF;
+  --p:#2563EB;--ph:#1D4ED8;
+  --green:#22C55E;--red:#EF4444;--yellow:#F59E0B;--blue:#2563EB;--cyan:#0EA5E9;
+  --green-bg:rgba(34,197,94,.1);--red-bg:rgba(239,68,68,.1);--yellow-bg:rgba(245,158,11,.1);--blue-bg:rgba(37,99,235,.1);
+  --nav:68px;--r1:8px;--r2:12px;--r3:16px;--r4:22px;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg:0 10px 15px rgba(0,0,0,.08),0 4px 6px rgba(0,0,0,.04);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
@@ -27,503 +28,426 @@ body{
   min-height:100vh;overflow-x:hidden;max-width:480px;margin:0 auto;position:relative;
 }
 ::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-thumb{background:var(--p);border-radius:10px}
-.screen{display:none;min-height:100vh;flex-direction:column;background:var(--bg);animation:fadeIn .3s ease}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
+.screen{display:none;min-height:100vh;flex-direction:column;background:var(--bg);animation:fadeIn .25s ease}
 .screen.active{display:flex}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── CONTENT ── */
-.content{flex:1;overflow-y:auto;padding-bottom:calc(var(--nav) + 24px)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.content{flex:1;overflow-y:auto;padding-bottom:calc(var(--nav) + 20px)}
 .pad{padding:0 16px 16px}
 
-/* ── GLASS ── */
-.glass{background:var(--card);border:1px solid var(--border);backdrop-filter:blur(20px)}
-
-/* ────────────────────────────────────────
-   LOGIN
-──────────────────────────────────────── */
-#screen-login{
-  background:radial-gradient(ellipse at top,#1a0a2e 0%,#0a0a0f 55%),
-             radial-gradient(ellipse at bottom right,#0d1a3a 0%,transparent 60%);
-}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
-.o1{width:320px;height:320px;background:rgba(139,92,246,.15);top:-80px;left:-80px}
-.o2{width:260px;height:260px;background:rgba(59,130,246,.12);top:100px;right:-80px}
-.o3{width:200px;height:200px;background:rgba(139,92,246,.08);bottom:150px;left:20px}
-
-.login-top{position:relative;z-index:1;padding:56px 24px 0;text-align:center}
+/* ── LOGIN ── */
+#screen-login{background:linear-gradient(160deg,#EEF2FF 0%,#F5F7FA 60%)}
+.login-top{padding:56px 24px 0;text-align:center}
 .login-logo{
   display:inline-flex;align-items:center;justify-content:center;
-  width:72px;height:72px;background:var(--gp);border-radius:22px;
-  margin-bottom:18px;box-shadow:var(--glow)
+  width:72px;height:72px;background:var(--p);border-radius:20px;
+  margin-bottom:18px;box-shadow:0 8px 24px rgba(37,99,235,.3)
 }
 .login-logo i{font-size:32px;color:#fff}
-.login-brand h1{
-  font-size:22px;font-weight:900;letter-spacing:2px;text-transform:uppercase;
-  background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
-}
-.login-brand p{font-size:11px;color:var(--t3);letter-spacing:1px;margin-top:3px}
-.login-car{
-  width:100%;max-width:360px;margin:20px auto 0;display:block;
-  filter:drop-shadow(0 0 40px rgba(139,92,246,.4));animation:floatcar 4s ease-in-out infinite
-}
-@keyframes floatcar{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.login-form{position:relative;z-index:1;padding:24px 24px 44px;flex:1}
-.login-h{font-size:20px;font-weight:800;margin-bottom:2px}
+.login-brand h1{font-size:22px;font-weight:900;letter-spacing:1px;color:var(--p)}
+.login-brand p{font-size:11px;color:var(--t2);letter-spacing:1px;margin-top:3px}
+.login-car{width:100%;max-width:300px;margin:20px auto 0;display:block;border-radius:var(--r3);filter:drop-shadow(0 8px 24px rgba(37,99,235,.15));animation:floatcar 4s ease-in-out infinite}
+@keyframes floatcar{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.login-form{padding:24px 24px 40px}
+.login-h{font-size:20px;font-weight:800;color:var(--t1);margin-bottom:2px}
 .login-sub{font-size:13px;color:var(--t2);margin-bottom:20px}
 .igrp{position:relative;margin-bottom:14px}
-.igrp i.pfx{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:14px}
+.igrp i.pfx{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:13px}
 .igrp input{
-  width:100%;padding:15px 15px 15px 42px;
-  background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:var(--r2);
+  width:100%;padding:14px 14px 14px 40px;
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--r2);
   color:var(--t1);font-family:'Inter',sans-serif;font-size:14px;outline:none;
-  transition:border .25s,box-shadow .25s
+  transition:border .2s,box-shadow .2s;box-shadow:var(--shadow)
 }
-.igrp input::placeholder{color:var(--t3)}
-.igrp input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(139,92,246,.15)}
-.eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--t3);cursor:pointer;font-size:14px;padding:4px}
-.rem-row{display:flex;align-items:center;gap:8px;margin-bottom:22px;font-size:13px;color:var(--t2)}
-.tog-wrap{position:relative;width:44px;height:24px;flex-shrink:0}
+.igrp input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--t3);cursor:pointer;font-size:13px;padding:4px}
+.rem-row{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px;color:var(--t2)}
+.tog-wrap{position:relative;width:40px;height:22px;flex-shrink:0}
 .tog-wrap input{opacity:0;width:0;height:0}
-.tog-slider{position:absolute;inset:0;background:rgba(255,255,255,.1);border-radius:24px;cursor:pointer;transition:.3s}
-.tog-slider:before{content:'';position:absolute;height:18px;width:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.3s}
-.tog-wrap input:checked+.tog-slider{background:var(--gp)}
-.tog-wrap input:checked+.tog-slider:before{transform:translateX(20px)}
-
-/* ── PRIMARY BTN ── */
+.tog-slider{position:absolute;inset:0;background:var(--border);border-radius:20px;cursor:pointer;transition:.25s}
+.tog-slider:before{content:'';position:absolute;height:16px;width:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.25s;box-shadow:var(--shadow)}
+.tog-wrap input:checked+.tog-slider{background:var(--p)}
+.tog-wrap input:checked+.tog-slider:before{transform:translateX(18px)}
 .btn-p{
-  width:100%;padding:15px;background:var(--gp);border:none;border-radius:var(--r2);
+  width:100%;padding:14px;background:var(--p);border:none;border-radius:var(--r2);
   color:#fff;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;cursor:pointer;
-  box-shadow:var(--glow);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;
+  box-shadow:0 4px 14px rgba(37,99,235,.35);transition:transform .15s,background .2s;
   display:flex;align-items:center;justify-content:center;gap:8px
 }
 .btn-p:active{transform:scale(.97)}
 .btn-p:disabled{opacity:.6;pointer-events:none}
-.ripple-el{position:absolute;width:0;height:0;background:rgba(255,255,255,.25);border-radius:50%;transform:translate(-50%,-50%);animation:ripple .6s ease-out}
-@keyframes ripple{to{width:280px;height:280px;opacity:0}}
-.login-secure{text-align:center;margin-top:16px;font-size:12px;color:var(--t3);display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-p:hover{background:var(--ph)}
+.login-secure{text-align:center;margin-top:14px;font-size:12px;color:var(--t3);display:flex;align-items:center;justify-content:center;gap:5px}
 
-/* ────────────────────────────────────────
-   TOPBAR
-──────────────────────────────────────── */
+/* ── TOPBAR ── */
 .topbar{
   display:flex;align-items:center;justify-content:space-between;
-  padding:50px 18px 14px;
-  background:linear-gradient(180deg,rgba(139,92,246,.08) 0%,transparent 100%);
-  position:sticky;top:0;z-index:50;
-  background-color:rgba(10,10,15,.9);backdrop-filter:blur(16px)
+  padding:48px 16px 14px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:50
 }
 .tb-left{display:flex;flex-direction:column}
-.tb-greeting{font-size:11px;color:var(--t2);font-weight:500;letter-spacing:.5px}
-.tb-title{font-size:19px;font-weight:800;margin-top:2px}
-.tb-right{display:flex;align-items:center;gap:10px}
+.tb-greeting{font-size:11px;color:var(--t2);font-weight:500}
+.tb-title{font-size:18px;font-weight:800;color:var(--t1);margin-top:1px}
+.tb-right{display:flex;align-items:center;gap:8px}
 .icon-btn{
-  width:38px;height:38px;background:var(--card);border:1px solid var(--border);
-  border-radius:11px;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:var(--t2);transition:all .2s;font-size:14px;position:relative
+  width:36px;height:36px;background:#fff;border:1.5px solid var(--border);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--t2);transition:all .2s;font-size:13px;
+  position:relative;box-shadow:var(--shadow)
 }
-.icon-btn:active{transform:scale(.92)}
+.icon-btn:active{transform:scale(.93)}
 .badge-dot{
   position:absolute;top:-3px;right:-3px;width:14px;height:14px;
   background:var(--red);border-radius:50%;font-size:8px;color:#fff;
   font-weight:700;display:flex;align-items:center;justify-content:center;
-  border:2px solid var(--bg)
+  border:2px solid #fff
 }
 .ava{
-  width:38px;height:38px;border-radius:11px;background:var(--gp);
+  width:36px;height:36px;border-radius:10px;background:var(--p);
   display:flex;align-items:center;justify-content:center;
-  font-size:15px;font-weight:800;color:#fff;cursor:pointer;
-  border:2px solid rgba(139,92,246,.4)
+  font-size:14px;font-weight:800;color:#fff;cursor:pointer;
+  box-shadow:var(--shadow)
 }
 
-/* ────────────────────────────────────────
-   BOTTOM NAV
-──────────────────────────────────────── */
+/* ── BOTTOM NAV ── */
 .bot-nav{
   position:fixed;bottom:0;left:50%;transform:translateX(-50%);
   width:100%;max-width:480px;height:var(--nav);
-  background:rgba(10,10,20,.95);border-top:1px solid var(--border);
-  backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:space-around;
-  padding:0 6px calc(env(safe-area-inset-bottom,0px));z-index:100
+  background:#fff;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-around;
+  padding:0 4px;padding-bottom:env(safe-area-inset-bottom,0);z-index:100;box-shadow:0 -2px 12px rgba(0,0,0,.06)
 }
 .nav-i{
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  flex:1;cursor:pointer;padding:8px 4px;transition:all .2s;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  flex:1;cursor:pointer;padding:8px 2px;transition:all .2s;
   color:var(--t3);position:relative
 }
-.nav-i span{font-size:9px;font-weight:700;letter-spacing:.3px;transition:color .2s}
+.nav-i span{font-size:9px;font-weight:700;letter-spacing:.2px;transition:color .2s}
 .nav-i i{font-size:18px;transition:color .2s,transform .2s}
 .nav-i.on{color:var(--p)}
-.nav-i.on i{transform:translateY(-2px)}
-.nav-i.on::before{
+.nav-i.on i{transform:translateY(-1px)}
+.nav-i.on::after{
   content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:28px;height:2px;border-radius:0 0 3px 3px;background:var(--gp)
+  width:24px;height:2.5px;border-radius:0 0 4px 4px;background:var(--p)
 }
-.nav-add{
-  width:50px;height:50px;background:var(--gp);border-radius:15px;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
-  box-shadow:0 4px 20px rgba(139,92,246,.45);transition:transform .2s,box-shadow .2s;
-  border:none;flex-shrink:0
-}
-.nav-add:active{transform:scale(.92)}
-.nav-add i{font-size:22px;color:#fff}
 
-/* ────────────────────────────────────────
-   SECTION HEADER
-──────────────────────────────────────── */
-.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin:20px 0 12px}
-.sec-title{font-size:15px;font-weight:700}
-.sec-link{font-size:12px;color:var(--p);cursor:pointer;font-weight:600}
-
-/* ────────────────────────────────────────
-   STATS CARDS
-──────────────────────────────────────── */
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.scard{
-  background:var(--gc);border:1px solid var(--border);border-radius:var(--r3);
-  padding:16px;position:relative;overflow:hidden;cursor:default;transition:transform .2s
-}
-.scard:active{transform:scale(.97)}
-.scard::before{content:'';position:absolute;width:70px;height:70px;border-radius:50%;top:-18px;right:-18px;opacity:.15}
-.scard.t::before{background:var(--blue)}
-.scard.a::before{background:var(--green)}
-.scard.r::before{background:var(--red)}
-.scard.m::before{background:var(--yellow)}
-.sico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:10px}
-.scard.t .sico{background:rgba(59,130,246,.2);color:var(--blue)}
-.scard.a .sico{background:rgba(16,185,129,.2);color:var(--green)}
-.scard.r .sico{background:rgba(239,68,68,.2);color:var(--red)}
-.scard.m .sico{background:rgba(245,158,11,.2);color:var(--yellow)}
-.snum{font-size:28px;font-weight:900;line-height:1}
-.slabel{font-size:11px;color:var(--t2);margin-top:3px;font-weight:500}
-
-/* ────────────────────────────────────────
-   VEHICLE CARDS
-──────────────────────────────────────── */
-.vcard{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--r3);
-  padding:13px;display:flex;align-items:center;gap:13px;
-  margin-bottom:10px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden
-}
-.vcard:active{transform:scale(.98);background:var(--card-h)}
-.vcard::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
-.vcard.disponible::after{background:var(--green)}
-.vcard.rentado::after{background:var(--red)}
-.vcard.mantenimiento::after{background:var(--yellow)}
-.vimg{
-  width:78px;height:56px;border-radius:var(--r1);overflow:hidden;flex-shrink:0;
-  background:rgba(139,92,246,.1);display:flex;align-items:center;justify-content:center
-}
-.vimg img{width:100%;height:100%;object-fit:cover}
-.vimg i{font-size:26px;color:var(--p);opacity:.4}
-.vinfo{flex:1;min-width:0}
-.vname{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.vplate{font-size:11px;color:var(--t3);margin-top:1px;font-family:monospace;letter-spacing:1px}
-.vprice{font-size:12px;color:var(--p);font-weight:700;margin-top:3px}
-
-/* ── STATUS BADGE ── */
-.sbadge{
-  display:inline-flex;align-items:center;gap:4px;padding:3px 8px;
-  border-radius:20px;font-size:10px;font-weight:700;margin-top:5px;letter-spacing:.4px
-}
-.sbadge.disponible{background:rgba(16,185,129,.18);color:var(--green)}
-.sbadge.rentado{background:rgba(239,68,68,.18);color:var(--red)}
-.sbadge.mantenimiento{background:rgba(245,158,11,.18);color:var(--yellow)}
-.sdot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:puls 2s infinite}
-@keyframes puls{0%,100%{opacity:1}50%{opacity:.4}}
-
-/* ────────────────────────────────────────
-   SEARCH + FILTER
-──────────────────────────────────────── */
-.sbar{
-  display:flex;align-items:center;gap:10px;background:var(--card);
-  border:1px solid var(--border);border-radius:var(--r2);padding:12px 14px;margin-bottom:14px
-}
-.sbar i{color:var(--t3);font-size:14px}
-.sbar input{flex:1;background:none;border:none;outline:none;color:var(--t1);font-size:14px;font-family:'Inter',sans-serif}
-.sbar input::placeholder{color:var(--t3)}
-.chips{display:flex;gap:7px;overflow-x:auto;padding-bottom:3px;margin-bottom:14px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{
-  padding:6px 13px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;
-  cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--t2);transition:all .2s
-}
-.chip.on{background:var(--gp);color:#fff;border-color:transparent;box-shadow:0 0 12px rgba(139,92,246,.25)}
-.chip:active{transform:scale(.95)}
-
-/* ────────────────────────────────────────
-   PAGE HEADER (back)
-──────────────────────────────────────── */
+/* ── PAGE HEADER ── */
 .phdr{
-  display:flex;align-items:center;gap:13px;
-  padding:50px 18px 14px;
-  background:linear-gradient(180deg,rgba(139,92,246,.08),transparent);
-  background-color:rgba(10,10,15,.9);backdrop-filter:blur(16px);
+  display:flex;align-items:center;gap:12px;
+  padding:48px 16px 14px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
   position:sticky;top:0;z-index:50
 }
 .back-btn{
-  width:36px;height:36px;background:var(--card);border:1px solid var(--border);
+  width:34px;height:34px;background:#fff;border:1.5px solid var(--border);
   border-radius:10px;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:var(--t1);font-size:13px;transition:all .2s;flex-shrink:0
+  cursor:pointer;color:var(--t1);font-size:12px;transition:all .2s;flex-shrink:0;box-shadow:var(--shadow)
 }
-.back-btn:active{transform:scale(.92)}
-.phdr-title{font-size:17px;font-weight:800;flex:1}
+.back-btn:active{transform:scale(.93)}
+.phdr-title{font-size:17px;font-weight:800;flex:1;color:var(--t1)}
 
-/* ────────────────────────────────────────
-   FORMS
-──────────────────────────────────────── */
-.fgrp{margin-bottom:13px}
-.flabel{font-size:12px;color:var(--t2);font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:4px}
-.freq{color:var(--p)}
-.finp{
-  width:100%;padding:13px 15px;background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r2);color:var(--t1);font-family:'Inter',sans-serif;
-  font-size:14px;outline:none;transition:border .2s,box-shadow .2s;-webkit-appearance:none
+/* ── SECTION HEADER ── */
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin:20px 0 12px}
+.sec-title{font-size:14px;font-weight:700;color:var(--t1)}
+.sec-link{font-size:12px;color:var(--p);cursor:pointer;font-weight:600}
+
+/* ── STATS ── */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.scard{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r3);
+  padding:15px;position:relative;overflow:hidden;cursor:pointer;
+  transition:transform .15s,box-shadow .15s;box-shadow:var(--shadow)
 }
-.finp:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(139,92,246,.12)}
+.scard:active{transform:scale(.97)}
+.scard:hover{box-shadow:var(--shadow-md)}
+.sico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;margin-bottom:10px}
+.scard.t .sico{background:var(--blue-bg);color:var(--blue)}
+.scard.a .sico{background:var(--green-bg);color:var(--green)}
+.scard.r .sico{background:var(--red-bg);color:var(--red)}
+.scard.m .sico{background:var(--yellow-bg);color:var(--yellow)}
+.snum{font-size:26px;font-weight:900;line-height:1;color:var(--t1)}
+.slabel{font-size:11px;color:var(--t2);margin-top:2px;font-weight:500}
+
+/* ── VEHICLE CARD ── */
+.vcard{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r3);
+  padding:12px;display:flex;align-items:center;gap:12px;
+  margin-bottom:10px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
+  box-shadow:var(--shadow)
+}
+.vcard:active{transform:scale(.98)}
+.vcard:hover{box-shadow:var(--shadow-md)}
+.vcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.vcard.disponible::before{background:var(--green)}
+.vcard.rentado::before{background:var(--red)}
+.vcard.mantenimiento::before{background:var(--yellow)}
+.vimg{
+  width:76px;height:56px;border-radius:10px;overflow:hidden;flex-shrink:0;
+  background:var(--bg3);display:flex;align-items:center;justify-content:center
+}
+.vimg img{width:100%;height:100%;object-fit:cover}
+.vimg i{font-size:24px;color:var(--t3)}
+.vinfo{flex:1;min-width:0}
+.vname{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--t1)}
+.vplate{font-size:10px;color:var(--t3);margin-top:1px;font-family:monospace;letter-spacing:.8px}
+.vprice{font-size:12px;color:var(--p);font-weight:700;margin-top:2px}
+.sbadge{
+  display:inline-flex;align-items:center;gap:4px;padding:2px 7px;
+  border-radius:20px;font-size:10px;font-weight:700;margin-top:4px;letter-spacing:.3px
+}
+.sbadge.disponible{background:var(--green-bg);color:var(--green)}
+.sbadge.rentado{background:var(--red-bg);color:var(--red)}
+.sbadge.mantenimiento{background:var(--yellow-bg);color:var(--yellow)}
+.sbadge.completada{background:var(--green-bg);color:var(--green)}
+.sbadge.cancelada{background:rgba(156,163,175,.15);color:var(--t3)}
+.sbadge.activa{background:var(--red-bg);color:var(--red)}
+.sdot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:puls 2s infinite;flex-shrink:0}
+@keyframes puls{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ── SEARCH + FILTER ── */
+.sbar{
+  display:flex;align-items:center;gap:9px;background:#fff;
+  border:1.5px solid var(--border);border-radius:var(--r2);padding:11px 13px;margin-bottom:12px;box-shadow:var(--shadow)
+}
+.sbar i{color:var(--t3);font-size:13px}
+.sbar input{flex:1;background:none;border:none;outline:none;color:var(--t1);font-size:14px;font-family:'Inter',sans-serif}
+.sbar input::placeholder{color:var(--t3)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;margin-bottom:12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  padding:5px 12px;border-radius:18px;font-size:11px;font-weight:700;white-space:nowrap;
+  cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--t2);transition:all .15s
+}
+.chip.on{background:var(--p);color:#fff;border-color:var(--p);box-shadow:0 2px 8px rgba(37,99,235,.3)}
+.chip:active{transform:scale(.95)}
+
+/* ── FORMS ── */
+.fgrp{margin-bottom:12px}
+.flabel{font-size:12px;color:var(--t2);font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:3px}
+.freq{color:var(--red)}
+.finp{
+  width:100%;padding:12px 14px;background:#fff;border:1.5px solid var(--border);
+  border-radius:var(--r2);color:var(--t1);font-family:'Inter',sans-serif;
+  font-size:14px;outline:none;transition:border .2s,box-shadow .2s;-webkit-appearance:none;box-shadow:var(--shadow)
+}
+.finp:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
 .finp::placeholder{color:var(--t3)}
-select.finp{cursor:pointer}
-select.finp option{background:#1a1a2e;color:#fff}
+select.finp{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
 .finp-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
 /* ── UPLOAD ZONE ── */
 .upzone{
-  width:100%;min-height:130px;border:2px dashed var(--border-b);border-radius:var(--r3);
+  width:100%;min-height:110px;border:2px dashed var(--border-b);border-radius:var(--r3);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:7px;cursor:pointer;margin-bottom:18px;position:relative;overflow:hidden;
-  background:rgba(139,92,246,.04);transition:all .2s
+  gap:6px;cursor:pointer;margin-bottom:14px;position:relative;overflow:hidden;
+  background:rgba(37,99,235,.03);transition:all .2s
 }
-.upzone:active{border-color:var(--p);background:rgba(139,92,246,.08)}
-.upzone i{font-size:34px;color:var(--p);opacity:.7}
+.upzone:hover{border-color:var(--p);background:rgba(37,99,235,.06)}
+.upzone i{font-size:28px;color:var(--p);opacity:.7}
 .upzone p{font-size:13px;color:var(--t2);font-weight:500}
 .upzone span{font-size:11px;color:var(--t3)}
 .up-inp{display:none}
-.img-previews{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.img-previews{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .img-prev-item{
-  position:relative;width:72px;height:56px;border-radius:var(--r1);overflow:hidden;
-  border:1px solid var(--border)
+  position:relative;width:70px;height:54px;border-radius:10px;overflow:hidden;border:1.5px solid var(--border)
 }
 .img-prev-item img{width:100%;height:100%;object-fit:cover}
 .img-prev-item .rm-img{
   position:absolute;top:2px;right:2px;width:18px;height:18px;
   background:rgba(239,68,68,.9);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:#fff;font-size:9px
+  display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:9px
 }
-.up-prog{position:absolute;inset:0;background:rgba(10,10,15,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:var(--r3)}
+.up-prog{position:absolute;inset:0;background:rgba(255,255,255,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:var(--r3)}
 .up-prog p{font-size:12px;color:var(--t2);font-weight:600}
-.prog-bar{width:80%;height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
-.prog-fill{height:100%;background:var(--gp);width:0%;border-radius:10px;transition:width .3s}
+.prog-bar{width:80%;height:4px;background:var(--border);border-radius:10px;overflow:hidden}
+.prog-fill{height:100%;background:var(--p);width:0%;border-radius:10px;transition:width .3s}
 
-/* ────────────────────────────────────────
-   DETAIL SCREEN
-──────────────────────────────────────── */
-.d-hero{width:100%;height:220px;position:relative;overflow:hidden;background:var(--gc)}
-.d-hero-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;color:rgba(139,92,246,.3)}
-.d-carousel{display:flex;height:100%;transition:transform .35s ease;will-change:transform}
+/* ── DETAIL SCREEN ── */
+.d-hero{width:100%;height:210px;position:relative;overflow:hidden;background:var(--bg3)}
+.d-hero-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:72px;color:var(--t3)}
+.d-carousel{display:flex;height:100%;transition:transform .3s ease;will-change:transform}
 .d-carousel-img{min-width:100%;height:100%;object-fit:cover;flex-shrink:0}
 .carousel-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
-.cdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);transition:background .2s}
+.cdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5);transition:background .2s}
 .cdot.on{background:#fff}
-.d-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,.8) 0%,transparent 50%)}
-.d-back{position:absolute;top:50px;left:14px;width:37px;height:37px;background:rgba(10,10,15,.7);border:1px solid var(--border);border-radius:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t1);backdrop-filter:blur(10px);font-size:13px}
-.d-menu{position:absolute;top:50px;right:14px;width:37px;height:37px;background:rgba(10,10,15,.7);border:1px solid var(--border);border-radius:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t1);backdrop-filter:blur(10px);font-size:13px}
+.d-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.3) 0%,transparent 50%)}
+.d-back{position:absolute;top:50px;left:14px;width:36px;height:36px;background:rgba(255,255,255,.92);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t1);font-size:12px;box-shadow:var(--shadow-md)}
+.d-menu{position:absolute;top:50px;right:14px;width:36px;height:36px;background:rgba(255,255,255,.92);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t1);font-size:13px;box-shadow:var(--shadow-md)}
 .d-body{padding:16px}
-.d-name-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-.d-name{font-size:21px;font-weight:900}
-.d-plate{font-size:12px;color:var(--t3);margin-bottom:4px;font-family:monospace;letter-spacing:1px}
-.d-price{font-size:14px;color:var(--p);font-weight:700;margin-bottom:14px}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
-.iitem{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:11px 13px;display:flex;align-items:center;gap:9px}
-.iico{width:30px;height:30px;border-radius:8px;background:rgba(139,92,246,.12);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--p);flex-shrink:0}
+.d-name{font-size:20px;font-weight:900;color:var(--t1)}
+.d-plate{font-size:11px;color:var(--t3);margin-top:2px;font-family:monospace;letter-spacing:.8px}
+.d-price{font-size:13px;color:var(--p);font-weight:700;margin-top:2px;margin-bottom:14px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.iitem{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:10px 12px;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow)}
+.iico{width:28px;height:28px;border-radius:7px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--p);flex-shrink:0}
 .ilabel{font-size:10px;color:var(--t3)}
-.ival{font-size:13px;font-weight:700}
+.ival{font-size:12px;font-weight:700;color:var(--t1)}
 
 /* ── STATUS SELECTOR ── */
-.ss-label{font-size:12px;color:var(--t2);font-weight:600;margin-bottom:8px}
-.ss-btns{display:flex;gap:7px;margin-bottom:18px}
+.ss-label{font-size:12px;color:var(--t2);font-weight:600;margin-bottom:7px}
+.ss-btns{display:flex;gap:7px;margin-bottom:16px}
 .ss-btn{
-  flex:1;padding:10px 5px;border:1px solid var(--border);border-radius:var(--r2);
-  background:transparent;color:var(--t2);font-family:'Inter',sans-serif;
-  font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;
-  display:flex;flex-direction:column;align-items:center;gap:4px
+  flex:1;padding:9px 4px;border:1.5px solid var(--border);border-radius:var(--r2);
+  background:#fff;color:var(--t2);font-family:'Inter',sans-serif;
+  font-size:10px;font-weight:700;cursor:pointer;transition:all .2s;
+  display:flex;flex-direction:column;align-items:center;gap:3px
 }
-.ss-btn i{font-size:15px}
-.ss-btn.disponible.on{border-color:var(--green);background:rgba(16,185,129,.12);color:var(--green);box-shadow:0 0 14px rgba(16,185,129,.2)}
-.ss-btn.rentado.on{border-color:var(--red);background:rgba(239,68,68,.12);color:var(--red);box-shadow:0 0 14px rgba(239,68,68,.2)}
-.ss-btn.mantenimiento.on{border-color:var(--yellow);background:rgba(245,158,11,.12);color:var(--yellow);box-shadow:0 0 14px rgba(245,158,11,.2)}
-.act-row{display:flex;gap:9px;margin-bottom:18px}
-.btn-edit{flex:1;padding:13px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);border-radius:var(--r2);color:var(--blue);font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s}
-.btn-del{flex:1;padding:13px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:var(--r2);color:var(--red);font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s}
+.ss-btn i{font-size:14px}
+.ss-btn.disponible.on{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.ss-btn.rentado.on{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.ss-btn.mantenimiento.on{border-color:var(--yellow);background:var(--yellow-bg);color:var(--yellow)}
+.act-row{display:flex;gap:8px;margin-bottom:16px}
+.btn-edit{flex:1;padding:12px;background:var(--blue-bg);border:1.5px solid rgba(37,99,235,.3);border-radius:var(--r2);color:var(--p);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s}
+.btn-del{flex:1;padding:12px;background:var(--red-bg);border:1.5px solid rgba(239,68,68,.3);border-radius:var(--r2);color:var(--red);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s}
 .btn-edit:active,.btn-del:active{transform:scale(.97)}
 
-/* ── QUICK ACTIONS ── */
-.qrow{display:flex;gap:9px;margin-bottom:10px}
-.qbtn{
-  flex:1;padding:13px 8px;background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r2);font-family:'Inter',sans-serif;font-size:12px;font-weight:700;
-  cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;
-  color:var(--t2);transition:all .2s
-}
-.qbtn i{font-size:18px}
-.qbtn:active{transform:scale(.97);background:var(--card-h)}
-.qbtn.active{border-color:var(--p);color:var(--p);background:rgba(139,92,246,.08)}
-
-/* ────────────────────────────────────────
-   RENTAL MODULE
-──────────────────────────────────────── */
+/* ── RENTAL CARD ── */
 .renta-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--r3);
-  padding:14px;margin-bottom:10px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden
+  background:#fff;border:1px solid var(--border);border-radius:var(--r3);
+  padding:13px;margin-bottom:9px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;box-shadow:var(--shadow)
 }
-.renta-card:active{transform:scale(.98);background:var(--card-h)}
-.renta-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
-.renta-card.activa::after{background:var(--red)}
-.renta-card.completada::after{background:var(--green)}
-.renta-card.cancelada::after{background:var(--t3)}
-.renta-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.renta-veh{font-size:14px;font-weight:700}
-.renta-meta{font-size:12px;color:var(--t2);margin-bottom:4px}
-.renta-total{font-size:18px;font-weight:900;color:var(--p)}
-.renta-days{font-size:11px;color:var(--t3);font-weight:600}
+.renta-card:hover{box-shadow:var(--shadow-md)}
+.renta-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.renta-card.activa::before{background:var(--red)}
+.renta-card.completada::before{background:var(--green)}
+.renta-card.cancelada::before{background:var(--t3)}
+.renta-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.renta-veh{font-size:13px;font-weight:700;color:var(--t1)}
+.renta-meta{font-size:11px;color:var(--t2);margin-bottom:3px;display:flex;align-items:center;gap:5px}
+.renta-total{font-size:17px;font-weight:900;color:var(--p)}
+.renta-days{font-size:11px;color:var(--t3);font-weight:600;margin-top:1px}
 
 /* ── CALC BOX ── */
 .calc-box{
-  background:rgba(139,92,246,.08);border:1px solid var(--border-b);
-  border-radius:var(--r2);padding:14px;margin-bottom:16px
+  background:var(--blue-bg);border:1.5px solid var(--border-b);
+  border-radius:var(--r2);padding:13px;margin-bottom:14px
 }
-.calc-row{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px}
-.calc-row:last-child{margin-bottom:0;border-top:1px solid var(--border);padding-top:8px;margin-top:4px}
-.calc-row.total{font-size:16px;font-weight:800;color:var(--p)}
+.calc-row{display:flex;justify-content:space-between;margin-bottom:5px;font-size:13px}
+.calc-row:last-child{margin-bottom:0;border-top:1px solid rgba(37,99,235,.15);padding-top:7px;margin-top:4px}
+.calc-row.total{font-size:15px;font-weight:800;color:var(--p)}
 .calc-label{color:var(--t2)}
-.calc-val{font-weight:600}
+.calc-val{font-weight:600;color:var(--t1)}
 
-/* ────────────────────────────────────────
-   EXPENSE MODULE
-──────────────────────────────────────── */
+/* ── EXPENSE CARD ── */
 .gasto-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--r2);
-  padding:13px;margin-bottom:9px;display:flex;align-items:center;gap:12px
+  background:#fff;border:1px solid var(--border);border-radius:var(--r2);
+  padding:12px;margin-bottom:8px;display:flex;align-items:center;gap:11px;box-shadow:var(--shadow)
 }
-.gasto-ico{width:38px;height:38px;border-radius:10px;background:rgba(239,68,68,.12);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--red);flex-shrink:0}
+.gasto-ico{width:36px;height:36px;border-radius:9px;background:var(--red-bg);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--red);flex-shrink:0}
 .gasto-info{flex:1;min-width:0}
-.gasto-tipo{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gasto-desc{font-size:11px;color:var(--t3);margin-top:2px}
+.gasto-tipo{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--t1)}
+.gasto-desc{font-size:11px;color:var(--t3);margin-top:1px}
 .gasto-fecha{font-size:10px;color:var(--t3);margin-top:1px}
-.gasto-monto{font-size:16px;font-weight:800;color:var(--red);flex-shrink:0}
+.gasto-monto{font-size:15px;font-weight:800;color:var(--red);flex-shrink:0}
 
-/* ────────────────────────────────────────
-   FINANCE / STATS
-──────────────────────────────────────── */
-.fin-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:16px}
-.fin-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:14px 10px;text-align:center}
-.fin-val{font-size:18px;font-weight:900;line-height:1.1}
-.fin-label{font-size:10px;color:var(--t3);margin-top:3px}
+/* ── FINANCE ── */
+.fin-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.fin-card{background:#fff;border:1px solid var(--border);border-radius:var(--r2);padding:12px 8px;text-align:center;box-shadow:var(--shadow)}
+.fin-val{font-size:16px;font-weight:900;line-height:1.1}
+.fin-label{font-size:10px;color:var(--t3);margin-top:3px;font-weight:500}
 .fin-card.ing .fin-val{color:var(--green)}
 .fin-card.gas .fin-val{color:var(--red)}
 .fin-card.bal .fin-val{color:var(--blue)}
 .fin-card.bal.loss .fin-val{color:var(--red)}
-
-.chart-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r3);padding:16px;margin-bottom:14px}
-.chart-title{font-size:14px;font-weight:700;margin-bottom:2px}
-.chart-sub{font-size:11px;color:var(--t3);margin-bottom:14px}
+.chart-card{background:#fff;border:1px solid var(--border);border-radius:var(--r3);padding:15px;margin-bottom:13px;box-shadow:var(--shadow)}
+.chart-title{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:1px}
+.chart-sub{font-size:10px;color:var(--t3);margin-bottom:12px}
 .chart-h200{position:relative;height:200px}
 .chart-h160{position:relative;height:160px}
-
-.bar-row{display:flex;align-items:center;gap:9px;margin-bottom:9px}
-.bar-label{font-size:11px;color:var(--t2);width:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bar-track{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:10px;overflow:hidden}
-.bar-fill{height:100%;border-radius:10px;background:var(--gp);transition:width 1.2s ease}
-.bar-count{font-size:11px;font-weight:700;color:var(--t2);width:22px;text-align:right}
-
-.month-tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;scrollbar-width:none;padding-bottom:2px}
+.month-tabs{display:flex;gap:5px;overflow-x:auto;margin-bottom:12px;scrollbar-width:none;padding-bottom:2px}
 .month-tabs::-webkit-scrollbar{display:none}
-.mtab{padding:5px 12px;border-radius:14px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--border);color:var(--t2);white-space:nowrap}
-.mtab.on{background:var(--gp);color:#fff;border-color:transparent}
-
-/* ────────────────────────────────────────
-   ALERTS
-──────────────────────────────────────── */
-.alert-banner{
-  display:flex;align-items:flex-start;gap:11px;
-  background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);
-  border-radius:var(--r2);padding:13px 14px;margin-bottom:10px;cursor:pointer;transition:all .2s
-}
-.alert-banner:active{transform:scale(.98)}
-.alert-banner i{color:var(--yellow);font-size:17px;margin-top:1px;flex-shrink:0}
-.alert-banner.red{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.25)}
-.alert-banner.red i{color:var(--red)}
-.alert-banner.green{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.25)}
-.alert-banner.green i{color:var(--green)}
-.al-title{font-size:13px;font-weight:700}
-.al-sub{font-size:11px;color:var(--t2);margin-top:2px}
-
-/* ────────────────────────────────────────
-   TOAST
-──────────────────────────────────────── */
-#toast-c{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:7px;pointer-events:none;width:92%;max-width:400px}
-.toast{padding:13px 16px;border-radius:var(--r2);display:flex;align-items:center;gap:11px;backdrop-filter:blur(20px);border:1px solid;box-shadow:0 8px 30px rgba(0,0,0,.4);animation:tin .3s ease;font-size:13px;font-weight:600}
-.toast.s{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.3);color:var(--green)}
-.toast.e{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.3);color:var(--red)}
-.toast.i{background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.3);color:var(--blue)}
-.toast.w{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.3);color:var(--yellow)}
-.toast i{font-size:17px;flex-shrink:0}
-@keyframes tin{from{opacity:0;transform:translateY(-10px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-
-/* ────────────────────────────────────────
-   LOADER
-──────────────────────────────────────── */
-#gloader{position:fixed;inset:0;z-index:9998;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
-.llogo{width:72px;height:72px;background:var(--gp);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;box-shadow:var(--glow);animation:lpulse 1.5s ease-in-out infinite}
-@keyframes lpulse{0%,100%{transform:scale(1);box-shadow:var(--glow)}50%{transform:scale(1.06);box-shadow:0 0 50px rgba(139,92,246,.5)}}
-.lring{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.05);border-top-color:var(--p);animation:spin .9s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.ltext{font-size:13px;color:var(--t3);font-weight:600;letter-spacing:1px}
-
-/* ────────────────────────────────────────
-   SKELETON
-──────────────────────────────────────── */
-.skel{background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--r3)}
-@keyframes shimmer{to{background-position:-200% 0}}
-.skel-card{height:78px;margin-bottom:10px}
-
-/* ────────────────────────────────────────
-   EMPTY STATE
-──────────────────────────────────────── */
-.empty{text-align:center;padding:50px 20px;display:flex;flex-direction:column;align-items:center;gap:11px}
-.empty-ico{width:76px;height:76px;background:rgba(139,92,246,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--p);opacity:.5}
-.empty-t{font-size:16px;font-weight:700}
-.empty-s{font-size:13px;color:var(--t3)}
-
-/* ────────────────────────────────────────
-   MODAL / SHEET
-──────────────────────────────────────── */
-.m-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s}
-.m-sheet{width:100%;max-width:480px;background:#13131f;border-radius:22px 22px 0 0;padding:18px 20px 36px;border:1px solid var(--border);border-bottom:none;animation:sup .3s ease}
-@keyframes sup{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.m-handle{width:34px;height:3px;background:rgba(255,255,255,.15);border-radius:10px;margin:0 auto 16px}
-.m-title{font-size:17px;font-weight:800;margin-bottom:14px}
-.m-btn{width:100%;padding:14px;border-radius:var(--r2);font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;margin-top:9px;transition:transform .2s;display:flex;align-items:center;justify-content:center;gap:8px}
-.m-btn:active{transform:scale(.97)}
-.m-btn.danger{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3)}
-.m-btn.cancel{background:var(--card);color:var(--t2);border:1px solid var(--border)}
-.m-btn.primary{background:var(--gp);color:#fff;box-shadow:var(--glow)}
-
-/* ────────────────────────────────────────
-   MISC
-──────────────────────────────────────── */
-.divider{height:1px;background:var(--border);margin:16px 0}
-.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:14px;font-size:10px;font-weight:700;letter-spacing:.3px}
-.tag.blue{background:rgba(59,130,246,.15);color:var(--blue)}
-.tag.purple{background:rgba(139,92,246,.15);color:var(--p)}
-
-.fin-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border)}
+.mtab{padding:5px 11px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);color:var(--t2);white-space:nowrap;background:#fff;transition:all .15s}
+.mtab.on{background:var(--p);color:#fff;border-color:var(--p)}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.bar-label{font-size:11px;color:var(--t2);width:65px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:5px;background:var(--bg3);border-radius:10px;overflow:hidden}
+.bar-fill{height:100%;border-radius:10px;background:var(--p);transition:width 1s ease}
+.bar-count{font-size:11px;font-weight:700;color:var(--t2);width:22px;text-align:right}
+.fin-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
 .fin-row:last-child{border-bottom:none}
 .fin-row-label{font-size:13px;color:var(--t2)}
-.fin-row-val{font-size:14px;font-weight:700}
+.fin-row-val{font-size:13px;font-weight:700;color:var(--t1)}
+
+/* ── ALERTS ── */
+.alert-banner{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--yellow-bg);border:1px solid rgba(245,158,11,.25);
+  border-radius:var(--r2);padding:12px 13px;margin-bottom:9px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow)
+}
+.alert-banner i{color:var(--yellow);font-size:16px;margin-top:1px;flex-shrink:0}
+.alert-banner.red{background:var(--red-bg);border-color:rgba(239,68,68,.25)}
+.alert-banner.red i{color:var(--red)}
+.alert-banner.green{background:var(--green-bg);border-color:rgba(34,197,94,.25)}
+.alert-banner.green i{color:var(--green)}
+.al-title{font-size:13px;font-weight:700;color:var(--t1)}
+.al-sub{font-size:11px;color:var(--t2);margin-top:1px}
+
+/* ── TOAST ── */
+#toast-c{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none;width:92%;max-width:380px}
+.toast{padding:12px 15px;border-radius:var(--r2);display:flex;align-items:center;gap:10px;border:1px solid;box-shadow:var(--shadow-lg);animation:tin .25s ease;font-size:13px;font-weight:600}
+.toast.s{background:rgba(240,253,244,.97);border-color:rgba(34,197,94,.4);color:#166534}
+.toast.e{background:rgba(254,242,242,.97);border-color:rgba(239,68,68,.4);color:#991B1B}
+.toast.i{background:rgba(239,246,255,.97);border-color:rgba(37,99,235,.4);color:#1E40AF}
+.toast.w{background:rgba(255,251,235,.97);border-color:rgba(245,158,11,.4);color:#92400E}
+.toast i{font-size:15px;flex-shrink:0}
+@keyframes tin{from{opacity:0;transform:translateY(-8px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* ── LOADER ── */
+#gloader{position:fixed;inset:0;z-index:9998;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.llogo{width:68px;height:68px;background:var(--p);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;box-shadow:0 8px 24px rgba(37,99,235,.35);animation:lpulse 1.5s ease-in-out infinite}
+@keyframes lpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.lring{width:42px;height:42px;border-radius:50%;border:3px solid var(--border);border-top-color:var(--p);animation:spin .85s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltext{font-size:12px;color:var(--t3);font-weight:600;letter-spacing:.8px}
+
+/* ── SKELETON ── */
+.skel{background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--r3)}
+@keyframes shimmer{to{background-position:-200% 0}}
+.skel-card{height:72px;margin-bottom:10px}
+
+/* ── EMPTY ── */
+.empty{text-align:center;padding:44px 16px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.empty-ico{width:68px;height:68px;background:var(--bg3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--t3)}
+.empty-t{font-size:15px;font-weight:700;color:var(--t1)}
+.empty-s{font-size:13px;color:var(--t3)}
+
+/* ── MODAL / SHEET ── */
+.m-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s}
+.m-sheet{width:100%;max-width:480px;background:#fff;border-radius:20px 20px 0 0;padding:16px 18px 36px;border:1px solid var(--border);border-bottom:none;animation:sup .3s ease;box-shadow:0 -8px 30px rgba(0,0,0,.12)}
+@keyframes sup{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.m-handle{width:32px;height:3px;background:var(--border);border-radius:10px;margin:0 auto 14px}
+.m-title{font-size:16px;font-weight:800;margin-bottom:13px;color:var(--t1)}
+.m-btn{width:100%;padding:13px;border-radius:var(--r2);font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;margin-top:8px;transition:transform .15s;display:flex;align-items:center;justify-content:center;gap:7px}
+.m-btn:active{transform:scale(.97)}
+.m-btn.danger{background:var(--red-bg);color:var(--red);border:1.5px solid rgba(239,68,68,.3)}
+.m-btn.cancel{background:var(--bg3);color:var(--t2);border:1.5px solid var(--border)}
+.m-btn.primary{background:var(--p);color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.3)}
+.m-btn.primary:hover{background:var(--ph)}
+
+/* ── MISC ── */
+.divider{height:1px;background:var(--border);margin:14px 0}
+.tag{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.2px}
+.tag.blue{background:var(--blue-bg);color:var(--blue)}
+.tag.green{background:var(--green-bg);color:var(--green)}
+
+/* ── PROFILE ── */
+.prof-header{background:linear-gradient(135deg,#EEF2FF,#DBEAFE);padding:32px 20px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.prof-ava{width:76px;height:76px;background:var(--p);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;font-weight:900;box-shadow:0 8px 24px rgba(37,99,235,.3)}
+.prof-name{font-size:18px;font-weight:800;color:var(--t1)}
+.prof-email{font-size:13px;color:var(--t2)}
+.prof-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+.prof-item:first-child{border-top:1px solid var(--border)}
+.prof-item:active{background:var(--bg3)}
+.prof-item-ico{width:34px;height:34px;border-radius:9px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--p);flex-shrink:0}
+.prof-item-text{flex:1}
+.prof-item-label{font-size:14px;font-weight:600;color:var(--t1)}
+.prof-item-sub{font-size:12px;color:var(--t3);margin-top:1px}
 
 @media(min-width:481px){
-  body{border-left:1px solid var(--border);border-right:1px solid var(--border)}
+  body{border-left:1px solid var(--border);border-right:1px solid var(--border);box-shadow:0 0 0 1px var(--border)}
 }
 </style>
 </head>
@@ -543,11 +467,10 @@ select.finp option{background:#1a1a2e;color:#fff}
   SCREEN: LOGIN
 ══════════════════════════════════════ -->
 <div id="screen-login" class="screen">
-  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
   <div class="login-top">
     <div class="login-logo"><i class="fas fa-car"></i></div>
-    <div class="login-brand"><h1>Rent a Car<br>Pro</h1><p>SISTEMA DE GESTIÓN INTELIGENTE</p></div>
-    <img class="login-car" src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=700&q=80" alt="Car" onerror="this.style.display='none'"/>
+    <div class="login-brand"><h1>Rent a Car Pro</h1><p>SISTEMA DE GESTIÓN INTELIGENTE</p></div>
+    <img class="login-car" src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80" alt="Car" onerror="this.style.display='none'"/>
   </div>
   <div class="login-form">
     <div class="login-h">¡Bienvenido!</div>
@@ -560,69 +483,59 @@ select.finp option{background:#1a1a2e;color:#fff}
     </div>
     <div class="rem-row"><div class="tog-wrap"><input type="checkbox" id="rem" checked/><span class="tog-slider"></span></div>Recordarme</div>
     <button class="btn-p" id="login-btn" onclick="doLogin(event)"><i class="fas fa-arrow-right-to-bracket"></i>Iniciar Sesión</button>
-    <div class="login-secure"><i class="fas fa-shield-halved"></i>Acceso seguro y protegido</div>
+    <div class="login-secure"><i class="fas fa-shield-halved"></i>Acceso seguro vía Firebase</div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: HOME (DASHBOARD)
+  SCREEN: HOME
 ══════════════════════════════════════ -->
 <div id="screen-home" class="screen">
   <div class="topbar">
     <div class="tb-left">
-      <span class="tb-greeting" id="greeting">Buenas tardes</span>
-      <span class="tb-title" id="uname">¡Hola, Encargado!</span>
+      <span class="tb-greeting" id="greeting">Bienvenido</span>
+      <span class="tb-title" id="uname">¡Hola!</span>
     </div>
     <div class="tb-right">
-      <div class="icon-btn" id="alert-btn" onclick="navigate('alertas')"><i class="fas fa-bell"></i><span class="badge-dot" id="alert-count" style="display:none">0</span></div>
-      <div class="ava" id="ava" onclick="navigate('perfil')">E</div>
+      <div class="icon-btn" onclick="navigate('alertas')"><i class="fas fa-bell"></i><span class="badge-dot" id="alert-count" style="display:none">0</span></div>
+      <div class="ava" id="ava" onclick="navigate('perfil')">A</div>
     </div>
   </div>
   <div class="content"><div class="pad">
-    <!-- Stats -->
-    <div class="sec-hdr" style="margin-top:4px"><span class="sec-title">Resumen General</span></div>
+    <div class="sec-hdr" style="margin-top:6px"><span class="sec-title">Resumen General</span></div>
     <div class="stats-grid">
       <div class="scard t" onclick="navigate('vehiculos')"><div class="sico"><i class="fas fa-car"></i></div><div class="snum" id="s-total">0</div><div class="slabel">Total Vehículos</div></div>
-      <div class="scard a" onclick="setNav('vehiculos');setFilter2('disponible')"><div class="sico"><i class="fas fa-circle-check"></i></div><div class="snum" id="s-avail">0</div><div class="slabel">Disponibles</div></div>
-      <div class="scard r" onclick="setNav('vehiculos');setFilter2('rentado')"><div class="sico"><i class="fas fa-key"></i></div><div class="snum" id="s-rented">0</div><div class="slabel">Rentados</div></div>
-      <div class="scard m" onclick="setNav('vehiculos');setFilter2('mantenimiento')"><div class="sico"><i class="fas fa-wrench"></i></div><div class="snum" id="s-maint">0</div><div class="slabel">Mantenimiento</div></div>
+      <div class="scard a" onclick="filterAndGo('disponible')"><div class="sico"><i class="fas fa-circle-check"></i></div><div class="snum" id="s-avail">0</div><div class="slabel">Disponibles</div></div>
+      <div class="scard r" onclick="filterAndGo('rentado')"><div class="sico"><i class="fas fa-key"></i></div><div class="snum" id="s-rented">0</div><div class="slabel">Rentados</div></div>
+      <div class="scard m" onclick="filterAndGo('mantenimiento')"><div class="sico"><i class="fas fa-wrench"></i></div><div class="snum" id="s-maint">0</div><div class="slabel">Mantenimiento</div></div>
     </div>
-
-    <!-- Finance Quick View -->
     <div class="sec-hdr"><span class="sec-title">Finanzas del Mes</span><span class="sec-link" onclick="navigate('finanzas')">Ver detalle →</span></div>
     <div class="fin-cards">
       <div class="fin-card ing"><div class="fin-val" id="h-ing">$0</div><div class="fin-label">Ingresos</div></div>
       <div class="fin-card gas"><div class="fin-val" id="h-gas">$0</div><div class="fin-label">Gastos</div></div>
       <div class="fin-card bal" id="h-bal-card"><div class="fin-val" id="h-bal">$0</div><div class="fin-label">Balance</div></div>
     </div>
-
-    <!-- Alerts -->
     <div id="home-alerts"></div>
-
-    <!-- Recent Vehicles -->
     <div class="sec-hdr"><span class="sec-title">Vehículos Recientes</span><span class="sec-link" onclick="navigate('vehiculos')">Ver todos →</span></div>
-    <div id="recent-list"><div class="skel skel-card"></div><div class="skel skel-card"></div></div>
-
-    <button class="btn-p" onclick="navigate('agregar')" style="margin-top:14px"><i class="fas fa-plus"></i>Agregar Vehículo</button>
+    <div id="recent-list"></div>
   </div></div>
-  <nav class="bot-nav">
-    <div class="nav-i on" onclick="navigate('home')"><i class="fas fa-house"></i><span>Inicio</span></div>
-    <div class="nav-i" onclick="navigate('vehiculos')"><i class="fas fa-car"></i><span>Vehículos</span></div>
-    <button class="nav-add" onclick="navigate('agregar')"><i class="fas fa-plus"></i></button>
-    <div class="nav-i" onclick="navigate('rentas')"><i class="fas fa-key"></i><span>Rentas</span></div>
-    <div class="nav-i" onclick="navigate('finanzas')"><i class="fas fa-chart-bar"></i><span>Finanzas</span></div>
-  </nav>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: VEHÍCULOS
+  SCREEN: VEHICLES
 ══════════════════════════════════════ -->
 <div id="screen-vehiculos" class="screen">
   <div class="topbar">
-    <div class="tb-left"><span class="tb-greeting">Flota completa</span><span class="tb-title">Vehículos</span></div>
-    <div class="tb-right"><div class="icon-btn" onclick="navigate('agregar')"><i class="fas fa-plus"></i></div></div>
+    <div class="tb-left">
+      <span class="tb-greeting">Flota</span>
+      <span class="tb-title">Mis Vehículos</span>
+    </div>
+    <div class="tb-right">
+      <div class="icon-btn" onclick="navigate('agregar')"><i class="fas fa-plus"></i></div>
+    </div>
   </div>
   <div class="content"><div class="pad">
+    <div style="height:10px"></div>
     <div class="sbar"><i class="fas fa-magnifying-glass"></i><input type="text" id="veh-search" placeholder="Buscar vehículo..." oninput="renderVehs()"/></div>
     <div class="chips" id="veh-chips">
       <span class="chip on" data-f="todos" onclick="setFilter2('todos',this)">Todos</span>
@@ -632,1433 +545,1363 @@ select.finp option{background:#1a1a2e;color:#fff}
     </div>
     <div id="veh-list"></div>
   </div></div>
-  <nav class="bot-nav">
-    <div class="nav-i" onclick="navigate('home')"><i class="fas fa-house"></i><span>Inicio</span></div>
-    <div class="nav-i on" onclick="navigate('vehiculos')"><i class="fas fa-car"></i><span>Vehículos</span></div>
-    <button class="nav-add" onclick="navigate('agregar')"><i class="fas fa-plus"></i></button>
-    <div class="nav-i" onclick="navigate('rentas')"><i class="fas fa-key"></i><span>Rentas</span></div>
-    <div class="nav-i" onclick="navigate('finanzas')"><i class="fas fa-chart-bar"></i><span>Finanzas</span></div>
-  </nav>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: DETALLE VEHÍCULO
+  SCREEN: VEHICLE DETAIL
 ══════════════════════════════════════ -->
 <div id="screen-detalle" class="screen">
-  <div class="d-hero" id="d-hero">
-    <div class="d-hero-ph" id="d-ph"><i class="fas fa-car"></i></div>
-    <div id="d-carousel-wrap" style="position:absolute;inset:0;overflow:hidden;display:none">
+  <div class="d-hero">
+    <div id="d-carousel-wrap" style="display:none;width:100%;height:100%;position:relative">
       <div id="d-carousel" class="d-carousel"></div>
       <div class="carousel-dots" id="carousel-dots"></div>
     </div>
+    <div class="d-hero-ph" id="d-ph"><i class="fas fa-car"></i></div>
     <div class="d-hero-overlay"></div>
-    <div class="d-back" onclick="navigate('vehiculos')"><i class="fas fa-chevron-left"></i></div>
-    <div class="d-menu" onclick="showVehModal()"><i class="fas fa-ellipsis-vertical"></i></div>
+    <div class="d-back" onclick="navigate('vehiculos')"><i class="fas fa-arrow-left"></i></div>
+    <div class="d-menu" onclick="showVehModal()"><i class="fas fa-ellipsis"></i></div>
   </div>
-  <div class="content" style="padding-bottom:24px"><div class="d-body">
-    <div class="d-name-row">
-      <div class="d-name" id="d-name">—</div>
-      <div class="sbadge disponible" id="d-sbadge"><span class="sdot"></span>Disponible</div>
-    </div>
+  <div class="content" style="padding-bottom:calc(var(--nav)+20px)"><div class="d-body">
+    <div class="d-name" id="d-name">—</div>
     <div class="d-plate" id="d-plate"></div>
     <div class="d-price" id="d-price"></div>
+    <div class="ss-label">Estado del vehículo</div>
+    <div class="ss-btns">
+      <button id="ss-d" class="ss-btn disponible" onclick="changeStatus('disponible')"><i class="fas fa-circle-check"></i>Disponible</button>
+      <button id="ss-r" class="ss-btn rentado" onclick="changeStatus('rentado')"><i class="fas fa-key"></i>Rentado</button>
+      <button id="ss-m" class="ss-btn mantenimiento" onclick="changeStatus('mantenimiento')"><i class="fas fa-wrench"></i>Mantenim.</button>
+    </div>
+    <div id="d-sbadge" class="sbadge disponible" style="margin-bottom:14px"><span class="sdot"></span>Disponible</div>
     <div class="info-grid">
       <div class="iitem"><div class="iico"><i class="fas fa-tag"></i></div><div><div class="ilabel">Marca</div><div class="ival" id="d-marca">—</div></div></div>
-      <div class="iitem"><div class="iico"><i class="fas fa-car-side"></i></div><div><div class="ilabel">Modelo</div><div class="ival" id="d-modelo">—</div></div></div>
+      <div class="iitem"><div class="iico"><i class="fas fa-car"></i></div><div><div class="ilabel">Modelo</div><div class="ival" id="d-modelo">—</div></div></div>
       <div class="iitem"><div class="iico"><i class="fas fa-calendar"></i></div><div><div class="ilabel">Año</div><div class="ival" id="d-ano">—</div></div></div>
       <div class="iitem"><div class="iico"><i class="fas fa-palette"></i></div><div><div class="ilabel">Color</div><div class="ival" id="d-color">—</div></div></div>
-      <div class="iitem"><div class="iico"><i class="fas fa-gauge"></i></div><div><div class="ilabel">Km</div><div class="ival" id="d-km">—</div></div></div>
+      <div class="iitem"><div class="iico"><i class="fas fa-gauge-high"></i></div><div><div class="ilabel">Kilometraje</div><div class="ival" id="d-km">—</div></div></div>
       <div class="iitem"><div class="iico"><i class="fas fa-gas-pump"></i></div><div><div class="ilabel">Combustible</div><div class="ival" id="d-comb">—</div></div></div>
     </div>
-
-    <div class="ss-label">Cambiar Estado</div>
-    <div class="ss-btns">
-      <button class="ss-btn disponible" id="ss-d" onclick="changeStatus('disponible')"><i class="fas fa-circle-check"></i>Disponible</button>
-      <button class="ss-btn rentado" id="ss-r" onclick="changeStatus('rentado')"><i class="fas fa-key"></i>Rentado</button>
-      <button class="ss-btn mantenimiento" id="ss-m" onclick="changeStatus('mantenimiento')"><i class="fas fa-wrench"></i>Mantenim.</button>
+    <div class="act-row">
+      <button class="btn-edit" onclick="editVeh()"><i class="fas fa-pen"></i>Editar</button>
+      <button class="btn-del" onclick="confirmDelVeh()"><i class="fas fa-trash"></i>Eliminar</button>
     </div>
-
-    <!-- Quick actions -->
-    <div class="qrow">
-      <div class="qbtn" onclick="openNewRenta()"><i class="fas fa-key" style="color:var(--p)"></i>Nueva Renta</div>
-      <div class="qbtn" onclick="openNewGasto()"><i class="fas fa-receipt" style="color:var(--red)"></i>Registrar Gasto</div>
-      <div class="qbtn" onclick="editVeh()"><i class="fas fa-pen" style="color:var(--blue)"></i>Editar</div>
-    </div>
-
-    <!-- Rental history -->
-    <div class="sec-hdr" style="margin-top:10px"><span class="sec-title">Historial de Rentas</span></div>
+    <div class="divider"></div>
+    <div class="sec-hdr"><span class="sec-title">Historial de Rentas</span></div>
     <div id="d-rentas-list"></div>
-    <!-- Expense history -->
-    <div class="sec-hdr" style="margin-top:6px"><span class="sec-title">Historial de Gastos</span></div>
+    <div class="sec-hdr"><span class="sec-title">Gastos del Vehículo</span></div>
     <div id="d-gastos-list"></div>
   </div></div>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: AGREGAR / EDITAR VEHÍCULO
+  SCREEN: ADD / EDIT VEHICLE
 ══════════════════════════════════════ -->
 <div id="screen-agregar" class="screen">
   <div class="phdr">
-    <div class="back-btn" id="agregar-back" onclick="navigate('vehiculos')"><i class="fas fa-chevron-left"></i></div>
-    <div class="phdr-title" id="form-title">Agregar Vehículo</div>
+    <div class="back-btn" onclick="navigate('vehiculos')"><i class="fas fa-arrow-left"></i></div>
+    <span class="phdr-title" id="form-title">Agregar Vehículo</span>
   </div>
   <div class="content"><div class="pad">
-    <!-- Images -->
-    <div class="upzone" onclick="document.getElementById('up-inp').click()" id="upzone">
-      <i class="fas fa-cloud-arrow-up" id="up-ico"></i>
-      <p id="up-text">Subir imágenes</p>
-      <span id="up-hint">JPG, PNG • Múltiples imágenes permitidas</span>
-    </div>
-    <input type="file" id="up-inp" class="up-inp" accept="image/*" multiple onchange="handleImages(event)"/>
-    <div class="img-previews" id="img-previews"></div>
-
-    <div class="finp-row">
-      <div class="fgrp"><div class="flabel">Marca <span class="freq">*</span></div><input class="finp" id="f-marca" placeholder="Toyota"/></div>
-      <div class="fgrp"><div class="flabel">Modelo <span class="freq">*</span></div><input class="finp" id="f-modelo" placeholder="Hilux"/></div>
-    </div>
-    <div class="finp-row">
-      <div class="fgrp"><div class="flabel">Año <span class="freq">*</span></div><input class="finp" id="f-ano" type="number" placeholder="2022" min="1990" max="2030"/></div>
-      <div class="fgrp"><div class="flabel">Placa <span style="font-size:10px;color:var(--t3)">(opcional)</span></div><input class="finp" id="f-placa" placeholder="ABC-123" style="text-transform:uppercase"/></div>
-    </div>
-    <div class="finp-row">
-      <div class="fgrp"><div class="flabel">Color</div><input class="finp" id="f-color" placeholder="Blanco"/></div>
-      <div class="fgrp"><div class="flabel">Kilometraje</div><input class="finp" id="f-km" type="number" placeholder="45000"/></div>
-    </div>
+    <div style="height:10px"></div>
     <div class="fgrp">
-      <div class="flabel">Precio por día <span class="freq">*</span></div>
-      <input class="finp" id="f-precio" type="number" placeholder="0.00" step="0.01" min="0"/>
+      <div class="flabel"><i class="fas fa-image" style="color:var(--p)"></i> Imágenes del vehículo</div>
+      <div class="img-previews" id="img-previews"></div>
+      <div class="upzone" onclick="document.getElementById('up-inp').click()">
+        <i class="fas fa-cloud-arrow-up" id="up-ico"></i>
+        <p id="up-text">Subir imágenes</p>
+        <span id="up-hint">JPG, PNG · Múltiples permitidas</span>
+        <input type="file" class="up-inp" id="up-inp" accept="image/*" multiple onchange="handleImages(event)"/>
+      </div>
     </div>
+    <div class="finp-row">
+      <div class="fgrp"><div class="flabel">Marca <span class="freq">*</span></div><input class="finp" id="f-marca" placeholder="Toyota" type="text"/></div>
+      <div class="fgrp"><div class="flabel">Modelo <span class="freq">*</span></div><input class="finp" id="f-modelo" placeholder="Corolla" type="text"/></div>
+    </div>
+    <div class="finp-row">
+      <div class="fgrp"><div class="flabel">Año <span class="freq">*</span></div><input class="finp" id="f-ano" placeholder="2022" type="text" inputmode="numeric"/></div>
+      <div class="fgrp"><div class="flabel">Placa</div><input class="finp" id="f-placa" placeholder="ABC-1234" type="text" style="text-transform:uppercase"/></div>
+    </div>
+    <div class="finp-row">
+      <div class="fgrp"><div class="flabel">Color</div><input class="finp" id="f-color" placeholder="Blanco" type="text"/></div>
+      <div class="fgrp"><div class="flabel">Kilometraje</div><input class="finp" id="f-km" placeholder="45000" type="text" inputmode="numeric"/></div>
+    </div>
+    <div class="fgrp"><div class="flabel">Precio por día <span class="freq">*</span></div><input class="finp" id="f-precio" placeholder="50.00" type="text" inputmode="decimal"/></div>
     <div class="finp-row">
       <div class="fgrp">
-        <div class="flabel">Tipo de vehículo</div>
+        <div class="flabel">Tipo</div>
         <select class="finp" id="f-tipo" onchange="checkTipoOtro()">
           <option value="">Seleccionar</option>
-          <option>Sedán</option><option>SUV</option><option>Pickup</option>
-          <option>Van</option><option>Camioneta</option><option>Otro</option>
+          <option>Sedán</option><option>SUV</option><option>Pickup</option><option>Van</option><option>Camioneta</option><option value="Otro">Otro...</option>
         </select>
       </div>
       <div class="fgrp">
         <div class="flabel">Combustible</div>
         <select class="finp" id="f-comb">
           <option value="">Seleccionar</option>
-          <option>Gasolina</option><option>Diésel</option><option>Eléctrico</option>
-          <option>Híbrido</option><option>GLP</option>
+          <option>Gasolina</option><option>Diésel</option><option>Híbrido</option><option>Eléctrico</option><option>Gas natural</option>
         </select>
       </div>
     </div>
-    <div class="fgrp" id="tipo-otro-wrap" style="display:none">
-      <div class="flabel">Especificar tipo <span class="freq">*</span></div>
-      <input class="finp" id="f-tipo-otro" placeholder="Ej: Moto, Camión..."/>
-    </div>
+    <div class="fgrp" id="tipo-otro-wrap" style="display:none"><div class="flabel">Especifica el tipo</div><input class="finp" id="f-tipo-otro" placeholder="Ej: Deportivo" type="text"/></div>
     <div class="fgrp">
-      <div class="flabel">Último mantenimiento</div>
-      <input class="finp" id="f-ultimo-mant" type="date"/>
-    </div>
-    <div class="fgrp">
-      <div class="flabel">Estado inicial</div>
+      <div class="flabel">Estado</div>
       <select class="finp" id="f-estado">
-        <option value="disponible">🟢 Disponible</option>
-        <option value="rentado">🔴 Rentado</option>
-        <option value="mantenimiento">🟡 Mantenimiento</option>
+        <option value="disponible">Disponible</option>
+        <option value="rentado">Rentado</option>
+        <option value="mantenimiento">Mantenimiento</option>
       </select>
     </div>
+    <div class="fgrp"><div class="flabel">Último mantenimiento</div><input class="finp" id="f-ultimo-mant" type="date"/></div>
     <button class="btn-p" id="save-btn" onclick="saveVeh()"><i class="fas fa-floppy-disk"></i>Guardar Vehículo</button>
-    <div style="height:10px"></div>
   </div></div>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: RENTAS
+  SCREEN: RENTALS
 ══════════════════════════════════════ -->
 <div id="screen-rentas" class="screen">
   <div class="topbar">
-    <div class="tb-left"><span class="tb-greeting">Control de rentas</span><span class="tb-title">Rentas</span></div>
-    <div class="tb-right"><div class="icon-btn" onclick="navigate('nueva-renta')"><i class="fas fa-plus"></i></div></div>
+    <div class="tb-left">
+      <span class="tb-greeting">Gestión</span>
+      <span class="tb-title">Rentas</span>
+    </div>
+    <div class="tb-right">
+      <div class="icon-btn" onclick="navigate('nueva-renta')"><i class="fas fa-plus"></i></div>
+    </div>
   </div>
   <div class="content"><div class="pad">
+    <div style="height:10px"></div>
     <div class="chips" id="renta-chips">
-      <span class="chip on" data-rf="todas" onclick="setRentaFilter('todas',this)">Todas</span>
-      <span class="chip" data-rf="activa" onclick="setRentaFilter('activa',this)">Activas</span>
-      <span class="chip" data-rf="completada" onclick="setRentaFilter('completada',this)">Completadas</span>
+      <span class="chip on" onclick="setRentaFilter('todas',this)">Todas</span>
+      <span class="chip" onclick="setRentaFilter('activa',this)">Activas</span>
+      <span class="chip" onclick="setRentaFilter('completada',this)">Completadas</span>
+      <span class="chip" onclick="setRentaFilter('cancelada',this)">Canceladas</span>
     </div>
     <div id="rentas-list"></div>
   </div></div>
-  <nav class="bot-nav">
-    <div class="nav-i" onclick="navigate('home')"><i class="fas fa-house"></i><span>Inicio</span></div>
-    <div class="nav-i" onclick="navigate('vehiculos')"><i class="fas fa-car"></i><span>Vehículos</span></div>
-    <button class="nav-add" onclick="navigate('nueva-renta')"><i class="fas fa-plus"></i></button>
-    <div class="nav-i on" onclick="navigate('rentas')"><i class="fas fa-key"></i><span>Rentas</span></div>
-    <div class="nav-i" onclick="navigate('finanzas')"><i class="fas fa-chart-bar"></i><span>Finanzas</span></div>
-  </nav>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: NUEVA RENTA
+  SCREEN: NEW RENTAL
 ══════════════════════════════════════ -->
 <div id="screen-nueva-renta" class="screen">
   <div class="phdr">
-    <div class="back-btn" onclick="navigate('rentas')"><i class="fas fa-chevron-left"></i></div>
-    <div class="phdr-title" id="renta-form-title">Nueva Renta</div>
+    <div class="back-btn" onclick="navigate('rentas')"><i class="fas fa-arrow-left"></i></div>
+    <span class="phdr-title" id="renta-form-title">Nueva Renta</span>
   </div>
   <div class="content"><div class="pad">
+    <div style="height:10px"></div>
     <div class="fgrp">
       <div class="flabel">Vehículo <span class="freq">*</span></div>
-      <select class="finp" id="r-veh" onchange="calcRenta()">
-        <option value="">Seleccionar vehículo disponible</option>
-      </select>
+      <select class="finp" id="r-veh" onchange="calcRenta()"><option value="">Seleccionar vehículo disponible</option></select>
     </div>
-    <div class="fgrp">
-      <div class="flabel">Cliente / Nombre</div>
-      <input class="finp" id="r-cliente" placeholder="Nombre del cliente"/>
-    </div>
+    <div class="fgrp"><div class="flabel">Cliente</div><input class="finp" id="r-cliente" placeholder="Nombre del cliente" type="text"/></div>
     <div class="finp-row">
       <div class="fgrp"><div class="flabel">Fecha inicio <span class="freq">*</span></div><input class="finp" id="r-inicio" type="date" onchange="calcRenta()"/></div>
       <div class="fgrp"><div class="flabel">Fecha fin <span class="freq">*</span></div><input class="finp" id="r-fin" type="date" onchange="calcRenta()"/></div>
     </div>
-    <div class="fgrp">
-      <div class="flabel">Notas</div>
-      <input class="finp" id="r-notas" placeholder="Observaciones..."/>
+    <div class="fgrp"><div class="flabel">Notas</div><textarea class="finp" id="r-notas" placeholder="Observaciones..." rows="2" style="resize:none"></textarea></div>
+    <div id="calc-box" class="calc-box" style="display:none">
+      <div class="calc-row"><span class="calc-label">Precio por día</span><span class="calc-val" id="calc-ppd">—</span></div>
+      <div class="calc-row"><span class="calc-label">Días</span><span class="calc-val" id="calc-dias">—</span></div>
+      <div class="calc-row total"><span class="calc-label">Total</span><span id="calc-total">—</span></div>
     </div>
-
-    <!-- CALCULATION BOX -->
-    <div class="calc-box" id="calc-box" style="display:none">
-      <div class="calc-row"><span class="calc-label">Precio por día</span><span class="calc-val" id="calc-ppd">$0</span></div>
-      <div class="calc-row"><span class="calc-label">Días rentados</span><span class="calc-val" id="calc-dias">0</span></div>
-      <div class="calc-row total"><span class="calc-label">Total a cobrar</span><span class="calc-val" id="calc-total">$0.00</span></div>
-    </div>
-
     <button class="btn-p" id="renta-save-btn" onclick="saveRenta()"><i class="fas fa-key"></i>Confirmar Renta</button>
-    <div style="height:10px"></div>
   </div></div>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: GASTOS
+  SCREEN: EXPENSES
 ══════════════════════════════════════ -->
 <div id="screen-gastos" class="screen">
   <div class="topbar">
-    <div class="tb-left"><span class="tb-greeting">Control de egresos</span><span class="tb-title">Gastos</span></div>
-    <div class="tb-right"><div class="icon-btn" onclick="navigate('nuevo-gasto')"><i class="fas fa-plus"></i></div></div>
+    <div class="tb-left">
+      <span class="tb-greeting">Control</span>
+      <span class="tb-title">Gastos</span>
+    </div>
+    <div class="tb-right">
+      <div class="icon-btn" onclick="navigate('nuevo-gasto')"><i class="fas fa-plus"></i></div>
+    </div>
   </div>
   <div class="content"><div class="pad">
-    <div class="sbar"><i class="fas fa-magnifying-glass"></i><input type="text" id="gasto-search" placeholder="Buscar gasto..." oninput="renderGastos()"/></div>
+    <div style="height:10px"></div>
+    <div id="gastos-summary" class="fin-cards" style="margin-top:4px"></div>
     <div id="gastos-list"></div>
   </div></div>
-  <nav class="bot-nav">
-    <div class="nav-i" onclick="navigate('home')"><i class="fas fa-house"></i><span>Inicio</span></div>
-    <div class="nav-i" onclick="navigate('vehiculos')"><i class="fas fa-car"></i><span>Vehículos</span></div>
-    <button class="nav-add" onclick="navigate('nuevo-gasto')"><i class="fas fa-plus"></i></button>
-    <div class="nav-i" onclick="navigate('rentas')"><i class="fas fa-key"></i><span>Rentas</span></div>
-    <div class="nav-i" onclick="navigate('finanzas')"><i class="fas fa-chart-bar"></i><span>Finanzas</span></div>
-  </nav>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: NUEVO GASTO
+  SCREEN: NEW EXPENSE
 ══════════════════════════════════════ -->
 <div id="screen-nuevo-gasto" class="screen">
   <div class="phdr">
-    <div class="back-btn" onclick="navigate('gastos')"><i class="fas fa-chevron-left"></i></div>
-    <div class="phdr-title">Registrar Gasto</div>
+    <div class="back-btn" onclick="navigate('gastos')"><i class="fas fa-arrow-left"></i></div>
+    <span class="phdr-title">Nuevo Gasto</span>
   </div>
   <div class="content"><div class="pad">
+    <div style="height:10px"></div>
     <div class="fgrp">
       <div class="flabel">Vehículo</div>
-      <select class="finp" id="g-veh">
-        <option value="">General (sin vehículo específico)</option>
-      </select>
+      <select class="finp" id="g-veh"><option value="">General (sin vehículo)</option></select>
     </div>
     <div class="fgrp">
       <div class="flabel">Tipo de gasto <span class="freq">*</span></div>
-      <select class="finp" id="g-tipo" onchange="checkGastoOtro()">
-        <option value="">Seleccionar</option>
-        <option>Aceite motor</option><option>Aceite transmisión</option>
-        <option>Corona</option><option>Mantenimiento general</option>
-        <option>Lavado</option><option>Multa</option><option>Seguro</option><option>Combustible</option>
-      </select>
-      <div id="g-tipos-custom" style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px"></div>
+      <select class="finp" id="g-tipo" onchange="checkGastoOtro()"><option value="">Seleccionar</option></select>
     </div>
     <div class="fgrp" id="g-tipo-nuevo-wrap" style="display:none">
-      <div class="flabel">Nuevo tipo de gasto</div>
+      <div class="flabel">Nombre del nuevo tipo</div>
       <div style="display:flex;gap:8px">
-        <input class="finp" id="g-tipo-nuevo" placeholder="Ej: Reparación frenos..." style="flex:1"/>
-        <button onclick="addGastoType()" style="padding:0 16px;background:var(--gp);border:none;border-radius:var(--r2);color:#fff;font-weight:700;cursor:pointer;font-size:13px">Agregar</button>
+        <input class="finp" id="g-tipo-nuevo" placeholder="Ej: Carrocería" type="text" style="flex:1"/>
+        <button class="btn-p" onclick="addGastoType()" style="width:auto;padding:12px 14px"><i class="fas fa-plus"></i></button>
       </div>
     </div>
     <div class="finp-row">
-      <div class="fgrp"><div class="flabel">Monto <span class="freq">*</span></div><input class="finp" id="g-monto" type="number" placeholder="0.00" step="0.01" min="0"/></div>
+      <div class="fgrp"><div class="flabel">Monto <span class="freq">*</span></div><input class="finp" id="g-monto" placeholder="0.00" type="text" inputmode="decimal"/></div>
       <div class="fgrp"><div class="flabel">Fecha <span class="freq">*</span></div><input class="finp" id="g-fecha" type="date"/></div>
     </div>
-    <div class="fgrp">
-      <div class="flabel">Descripción</div>
-      <input class="finp" id="g-desc" placeholder="Detalle del gasto..."/>
-    </div>
-    <button class="btn-p" id="gasto-save-btn" onclick="saveGasto()"><i class="fas fa-receipt"></i>Registrar Gasto</button>
-    <div style="height:10px"></div>
+    <div class="fgrp"><div class="flabel">Descripción</div><textarea class="finp" id="g-desc" placeholder="Detalles del gasto..." rows="2" style="resize:none"></textarea></div>
+    <button class="btn-p" id="gasto-save-btn" onclick="saveGasto()"><i class="fas fa-floppy-disk"></i>Registrar Gasto</button>
   </div></div>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: FINANZAS
+  SCREEN: FINANCES
 ══════════════════════════════════════ -->
 <div id="screen-finanzas" class="screen">
   <div class="topbar">
-    <div class="tb-left"><span class="tb-greeting">Datos reales en tiempo real</span><span class="tb-title">Finanzas</span></div>
+    <div class="tb-left">
+      <span class="tb-greeting">Análisis</span>
+      <span class="tb-title">Finanzas</span>
+    </div>
   </div>
   <div class="content"><div class="pad">
-    <!-- Period selector -->
+    <div style="height:10px"></div>
     <div class="month-tabs" id="month-tabs"></div>
-
-    <!-- KPIs -->
-    <div class="fin-cards">
-      <div class="fin-card ing"><div class="fin-val" id="f-ing">$0</div><div class="fin-label">Ingresos</div></div>
-      <div class="fin-card gas"><div class="fin-val" id="f-gas">$0</div><div class="fin-label">Gastos</div></div>
-      <div class="fin-card bal" id="f-bal-card"><div class="fin-val" id="f-bal">$0</div><div class="fin-label">Balance</div></div>
-    </div>
-
-    <!-- Balance indicator -->
-    <div class="alert-banner" id="f-balance-banner" style="margin-bottom:14px">
-      <i class="fas fa-circle-info"></i>
-      <div><div class="al-title" id="f-balance-title">Sin datos aún</div><div class="al-sub" id="f-balance-sub">Registra rentas y gastos para ver el resultado</div></div>
-    </div>
-
-    <!-- Ingreso chart -->
+    <div class="fin-cards" id="fin-cards-detail"></div>
     <div class="chart-card">
-      <div class="chart-title">Ingresos por Mes</div>
-      <div class="chart-sub">Basado en rentas completadas</div>
-      <div class="chart-h200"><canvas id="ing-chart"></canvas></div>
+      <div class="chart-title">Ingresos vs Gastos</div>
+      <div class="chart-sub" id="chart-period-label">Período actual</div>
+      <div class="chart-h200"><canvas id="chart-ig"></canvas></div>
     </div>
-
-    <!-- Gasto chart -->
     <div class="chart-card">
-      <div class="chart-title">Gastos por Tipo</div>
-      <div class="chart-sub">Distribución de egresos</div>
-      <div class="chart-h160"><canvas id="gas-chart"></canvas></div>
+      <div class="chart-title">Rentas por vehículo</div>
+      <div class="chart-sub">Distribución de ingresos</div>
+      <div class="chart-h160"><canvas id="chart-veh"></canvas></div>
     </div>
-
-    <!-- Detail rows -->
     <div class="chart-card">
-      <div class="chart-title">Detalle del Período</div>
-      <div class="chart-sub" id="f-period-sub"></div>
-      <div id="f-detail-rows"></div>
-    </div>
-
-    <!-- Vehicles most rented -->
-    <div class="chart-card">
-      <div class="chart-title">Vehículos más Rentados</div>
-      <div class="chart-sub">Por número de rentas</div>
-      <div id="f-top-veh"></div>
+      <div class="chart-title">Detalle del período</div>
+      <div class="chart-sub" id="fin-detail-sub">Resumen financiero</div>
+      <div id="fin-detail-rows"></div>
     </div>
   </div></div>
-  <nav class="bot-nav">
-    <div class="nav-i" onclick="navigate('home')"><i class="fas fa-house"></i><span>Inicio</span></div>
-    <div class="nav-i" onclick="navigate('vehiculos')"><i class="fas fa-car"></i><span>Vehículos</span></div>
-    <button class="nav-add" onclick="navigate('agregar')"><i class="fas fa-plus"></i></button>
-    <div class="nav-i" onclick="navigate('rentas')"><i class="fas fa-key"></i><span>Rentas</span></div>
-    <div class="nav-i on" onclick="navigate('finanzas')"><i class="fas fa-chart-bar"></i><span>Finanzas</span></div>
-  </nav>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: ALERTAS
+  SCREEN: PROFILE
+══════════════════════════════════════ -->
+<div id="screen-perfil" class="screen">
+  <div class="content" style="padding-bottom:calc(var(--nav)+20px)">
+    <div class="prof-header">
+      <div class="prof-ava" id="prof-ava">A</div>
+      <div class="prof-name" id="prof-name">Encargado</div>
+      <div class="prof-email" id="prof-email">—</div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="prof-item" onclick="navigate('vehiculos')">
+        <div class="prof-item-ico"><i class="fas fa-car"></i></div>
+        <div class="prof-item-text"><div class="prof-item-label">Mis Vehículos</div><div class="prof-item-sub">Gestionar flota</div></div>
+        <i class="fas fa-chevron-right" style="color:var(--t3);font-size:12px"></i>
+      </div>
+      <div class="prof-item" onclick="navigate('finanzas')">
+        <div class="prof-item-ico" style="background:var(--green-bg);color:var(--green)"><i class="fas fa-chart-line"></i></div>
+        <div class="prof-item-text"><div class="prof-item-label">Finanzas</div><div class="prof-item-sub">Ver reportes y gráficas</div></div>
+        <i class="fas fa-chevron-right" style="color:var(--t3);font-size:12px"></i>
+      </div>
+      <div class="prof-item" onclick="navigate('alertas')">
+        <div class="prof-item-ico" style="background:var(--yellow-bg);color:var(--yellow)"><i class="fas fa-bell"></i></div>
+        <div class="prof-item-text"><div class="prof-item-label">Alertas</div><div class="prof-item-sub">Notificaciones del sistema</div></div>
+        <i class="fas fa-chevron-right" style="color:var(--t3);font-size:12px"></i>
+      </div>
+      <div class="prof-item" onclick="doLogout()" style="margin-top:8px">
+        <div class="prof-item-ico" style="background:var(--red-bg);color:var(--red)"><i class="fas fa-right-from-bracket"></i></div>
+        <div class="prof-item-text"><div class="prof-item-label" style="color:var(--red)">Cerrar Sesión</div><div class="prof-item-sub">Salir del sistema</div></div>
+      </div>
+    </div>
+    <div style="padding:20px 16px;text-align:center;color:var(--t3);font-size:11px">
+      Rent a Car Pro v2.0 · Sistema de Gestión Inteligente
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  SCREEN: ALERTS
 ══════════════════════════════════════ -->
 <div id="screen-alertas" class="screen">
   <div class="phdr">
-    <div class="back-btn" onclick="navigate('home')"><i class="fas fa-chevron-left"></i></div>
-    <div class="phdr-title">Alertas del Sistema</div>
+    <div class="back-btn" onclick="navigate('home')"><i class="fas fa-arrow-left"></i></div>
+    <span class="phdr-title">Alertas</span>
   </div>
   <div class="content"><div class="pad">
+    <div style="height:10px"></div>
     <div id="alertas-list"></div>
   </div></div>
 </div>
 
 <!-- ══════════════════════════════════════
-  SCREEN: PERFIL
+  BOTTOM NAV
 ══════════════════════════════════════ -->
-<div id="screen-perfil" class="screen">
-  <div style="padding:52px 20px 28px;background:linear-gradient(180deg,rgba(139,92,246,.12),transparent);text-align:center">
-    <div style="width:80px;height:80px;background:var(--gp);border-radius:22px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;color:#fff;box-shadow:var(--glow);border:3px solid rgba(139,92,246,.4)" id="p-ava">E</div>
-    <div style="font-size:20px;font-weight:800" id="p-name">Encargado</div>
-    <div style="font-size:12px;color:var(--t3);margin-top:3px" id="p-email"></div>
-    <div style="display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,.15);color:var(--p);font-size:12px;font-weight:700"><i class="fas fa-shield-halved"></i>Encargado</div>
-  </div>
-  <div class="content" style="padding-bottom:24px"><div class="pad" style="padding-top:6px">
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r3);overflow:hidden">
-      <div class="fin-row" style="padding:14px 16px;cursor:pointer" onclick="navigate('vehiculos')"><span style="display:flex;align-items:center;gap:11px"><span style="width:36px;height:36px;background:rgba(139,92,246,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--p)"><i class="fas fa-car"></i></span><span><div style="font-size:14px;font-weight:600">Vehículos</div><div style="font-size:11px;color:var(--t3)">Gestionar flota</div></span></span><i class="fas fa-chevron-right" style="color:var(--t3);font-size:12px"></i></div>
-      <div class="fin-row" style="padding:14px 16px;cursor:pointer" onclick="navigate('rentas')"><span style="display:flex;align-items:center;gap:11px"><span style="width:36px;height:36px;background:rgba(59,130,246,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--blue)"><i class="fas fa-key"></i></span><span><div style="font-size:14px;font-weight:600">Rentas</div><div style="font-size:11px;color:var(--t3)">Historial de alquileres</div></span></span><i class="fas fa-chevron-right" style="color:var(--t3);font-size:12px"></i></div>
-      <div class="fin-row" style="padding:14px 16px;cursor:pointer" onclick="navigate('gastos')"><span style="display:flex;align-items:center;gap:11px"><span style="width:36px;height:36px;background:rgba(239,68,68,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--red)"><i class="fas fa-receipt"></i></span><span><div style="font-size:14px;font-weight:600">Gastos</div><div style="font-size:11px;color:var(--t3)">Historial de egresos</div></span></span><i class="fas fa-chevron-right" style="color:var(--t3);font-size:12px"></i></div>
-      <div class="fin-row" style="padding:14px 16px;cursor:pointer" onclick="navigate('finanzas')"><span style="display:flex;align-items:center;gap:11px"><span style="width:36px;height:36px;background:rgba(16,185,129,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--green)"><i class="fas fa-chart-line"></i></span><span><div style="font-size:14px;font-weight:600">Finanzas</div><div style="font-size:11px;color:var(--t3)">Reportes y estadísticas</div></span></span><i class="fas fa-chevron-right" style="color:var(--t3);font-size:12px"></i></div>
-      <div class="fin-row" style="padding:14px 16px;cursor:pointer;border-bottom:none" onclick="doLogout()"><span style="display:flex;align-items:center;gap:11px"><span style="width:36px;height:36px;background:rgba(239,68,68,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--red)"><i class="fas fa-right-from-bracket"></i></span><span><div style="font-size:14px;font-weight:600;color:var(--red)">Cerrar Sesión</div><div style="font-size:11px;color:var(--t3)">Salir del sistema</div></span></span><i class="fas fa-chevron-right" style="color:var(--t3);font-size:12px"></i></div>
-    </div>
-    <div style="text-align:center;padding:20px 0 8px;color:var(--t3);font-size:11px"><i class="fas fa-car"></i>&nbsp;Rent a Car Pro v2.0 &nbsp;·&nbsp; © 2026</div>
-  </div></div>
-  <nav class="bot-nav">
-    <div class="nav-i" onclick="navigate('home')"><i class="fas fa-house"></i><span>Inicio</span></div>
-    <div class="nav-i" onclick="navigate('vehiculos')"><i class="fas fa-car"></i><span>Vehículos</span></div>
-    <button class="nav-add" onclick="navigate('agregar')"><i class="fas fa-plus"></i></button>
-    <div class="nav-i" onclick="navigate('rentas')"><i class="fas fa-key"></i><span>Rentas</span></div>
-    <div class="nav-i" onclick="navigate('finanzas')"><i class="fas fa-chart-bar"></i><span>Finanzas</span></div>
-  </nav>
+<div class="bot-nav" id="bot-nav" style="display:none">
+  <div class="nav-i" id="nav-home" onclick="navigate('home')"><i class="fas fa-house"></i><span>Inicio</span></div>
+  <div class="nav-i" id="nav-vehiculos" onclick="navigate('vehiculos')"><i class="fas fa-car"></i><span>Vehículos</span></div>
+  <div class="nav-i" id="nav-rentas" onclick="navigate('rentas')"><i class="fas fa-key"></i><span>Rentas</span></div>
+  <div class="nav-i" id="nav-gastos" onclick="navigate('gastos')"><i class="fas fa-dollar-sign"></i><span>Gastos</span></div>
+  <div class="nav-i" id="nav-finanzas" onclick="navigate('finanzas')"><i class="fas fa-chart-bar"></i><span>Finanzas</span></div>
+  <div class="nav-i" id="nav-perfil" onclick="navigate('perfil')"><i class="fas fa-user"></i><span>Perfil</span></div>
 </div>
 
-<!-- MODALS -->
-<div id="veh-modal" style="display:none">
-  <div class="m-overlay" onclick="closeModal('veh-modal')">
-    <div class="m-sheet" onclick="event.stopPropagation()">
-      <div class="m-handle"></div>
-      <div class="m-title">Opciones del Vehículo</div>
-      <button class="m-btn primary" onclick="openNewRenta();closeModal('veh-modal')"><i class="fas fa-key"></i>Nueva Renta</button>
-      <button class="m-btn primary" style="background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3);box-shadow:none" onclick="openNewGasto();closeModal('veh-modal')"><i class="fas fa-receipt"></i>Registrar Gasto</button>
-      <button class="m-btn danger" onclick="confirmDelVeh()"><i class="fas fa-trash"></i>Eliminar Vehículo</button>
-      <button class="m-btn cancel" onclick="closeModal('veh-modal')">Cancelar</button>
-    </div>
+<!-- ══════════════════════════════════════
+  MODALS
+══════════════════════════════════════ -->
+<!-- Vehicle menu modal -->
+<div class="m-overlay" id="veh-modal" style="display:none" onclick="if(event.target===this)closeModal('veh-modal')">
+  <div class="m-sheet">
+    <div class="m-handle"></div>
+    <div class="m-title">Opciones del Vehículo</div>
+    <button class="m-btn primary" onclick="closeModal('veh-modal');editVeh()"><i class="fas fa-pen"></i>Editar Vehículo</button>
+    <button class="m-btn" onclick="closeModal('veh-modal');navigate('nueva-renta')" style="background:var(--green-bg);color:var(--green);border:1.5px solid rgba(34,197,94,.3)"><i class="fas fa-key"></i>Nueva Renta</button>
+    <button class="m-btn" onclick="closeModal('veh-modal');navigate('nuevo-gasto')" style="background:var(--yellow-bg);color:var(--yellow);border:1.5px solid rgba(245,158,11,.3)"><i class="fas fa-wrench"></i>Registrar Gasto</button>
+    <button class="m-btn danger" onclick="confirmDelVeh()"><i class="fas fa-trash"></i>Eliminar Vehículo</button>
+    <button class="m-btn cancel" onclick="closeModal('veh-modal')">Cancelar</button>
   </div>
 </div>
 
-<div id="confirm-del" style="display:none">
-  <div class="m-overlay" onclick="closeModal('confirm-del')">
-    <div class="m-sheet" onclick="event.stopPropagation()">
-      <div class="m-handle"></div>
-      <div class="m-title">⚠️ Eliminar Vehículo</div>
-      <p style="font-size:13px;color:var(--t2);margin-bottom:16px">Esta acción no se puede deshacer. Se eliminará el vehículo y todos sus datos relacionados.</p>
-      <button class="m-btn danger" onclick="delVeh()"><i class="fas fa-trash"></i>Sí, Eliminar</button>
-      <button class="m-btn cancel" onclick="closeModal('confirm-del')">Cancelar</button>
-    </div>
+<!-- Confirm delete vehicle -->
+<div class="m-overlay" id="confirm-del" style="display:none" onclick="if(event.target===this)closeModal('confirm-del')">
+  <div class="m-sheet">
+    <div class="m-handle"></div>
+    <div class="m-title">¿Eliminar este vehículo?</div>
+    <p style="font-size:13px;color:var(--t2);margin-bottom:4px">Esta acción no se puede deshacer.</p>
+    <p style="font-size:12px;color:var(--red);font-weight:600" id="del-warn"></p>
+    <button class="m-btn danger" id="del-confirm-btn" onclick="delVeh()"><i class="fas fa-trash"></i>Sí, eliminar</button>
+    <button class="m-btn cancel" onclick="closeModal('confirm-del')">Cancelar</button>
   </div>
 </div>
 
-<div id="complete-renta-modal" style="display:none">
-  <div class="m-overlay" onclick="closeModal('complete-renta-modal')">
-    <div class="m-sheet" onclick="event.stopPropagation()">
-      <div class="m-handle"></div>
-      <div class="m-title">Finalizar Renta</div>
-      <p style="font-size:13px;color:var(--t2);margin-bottom:16px">¿Confirmas que el vehículo fue devuelto? El estado cambiará a "Disponible" y la renta quedará marcada como completada.</p>
-      <button class="m-btn primary" onclick="completeRenta()"><i class="fas fa-circle-check"></i>Sí, Finalizar</button>
-      <button class="m-btn cancel" onclick="closeModal('complete-renta-modal')">Cancelar</button>
-    </div>
+<!-- Complete rental modal -->
+<div class="m-overlay" id="complete-renta-modal" style="display:none" onclick="if(event.target===this)closeModal('complete-renta-modal')">
+  <div class="m-sheet">
+    <div class="m-handle"></div>
+    <div class="m-title">Finalizar Renta</div>
+    <p style="font-size:13px;color:var(--t2);margin-bottom:16px">¿Confirmas que la renta ha concluido? El vehículo volverá a estar disponible.</p>
+    <button class="m-btn primary" onclick="completeRenta()"><i class="fas fa-circle-check"></i>Sí, finalizar</button>
+    <button class="m-btn cancel" onclick="closeModal('complete-renta-modal')">Cancelar</button>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════════════════
+<!-- Cancel rental modal -->
+<div class="m-overlay" id="cancel-renta-modal" style="display:none" onclick="if(event.target===this)closeModal('cancel-renta-modal')">
+  <div class="m-sheet">
+    <div class="m-handle"></div>
+    <div class="m-title">Cancelar Renta</div>
+    <p style="font-size:13px;color:var(--t2);margin-bottom:16px">¿Confirmas que deseas cancelar esta renta? El vehículo volverá a estar disponible.</p>
+    <button class="m-btn danger" onclick="cancelRenta()"><i class="fas fa-ban"></i>Sí, cancelar</button>
+    <button class="m-btn cancel" onclick="closeModal('cancel-renta-modal')">No, mantener</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
   FIREBASE + APP LOGIC
-════════════════════════════════════════════════════════ -->
+══════════════════════════════════════ -->
 <script type="module">
-import { initializeApp }    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc,
-         onSnapshot, query, orderBy, serverTimestamp, where, getDocs }
-  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut }
-  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut,
+  setPersistence, browserLocalPersistence, browserSessionPersistence
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, collection, query, orderBy, onSnapshot,
+  addDoc, updateDoc, deleteDoc, doc, serverTimestamp, getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-/* ─── CONFIG ─── */
-const firebaseConfig = {
-  apiKey:"AIzaSyDIK3JF-xJ0qu2L0r6FrY9LJs_nWbMWzag",
-  authDomain:"sistema-gestion-carros.firebaseapp.com",
-  projectId:"sistema-gestion-carros",
-  storageBucket:"sistema-gestion-carros.firebasestorage.app",
-  messagingSenderId:"313952784776",
-  appId:"1:313952784776:web:0d2b3fa3e1e4049de4aa3d"
+/* ══════════════════════════════════════
+  CONFIG — replace if needed
+══════════════════════════════════════ */
+const FIREBASE_CONFIG = {
+  apiKey:            "AIzaSyDIK3JF-xJ0qu2L0r6FrY9LJs_nWbMWzag",
+  authDomain:        "sistema-gestion-carros.firebaseapp.com",
+  projectId:         "sistema-gestion-carros",
+  storageBucket:     "sistema-gestion-carros.firebasestorage.app",
+  messagingSenderId: "313952784776",
+  appId:             "1:313952784776:web:0d2b3fa3e1e4049de4aa3d"
 };
 const CLOUD_NAME   = "dgxljgjyr";
 const CLOUD_PRESET = "Renta Car";
 
-const app  = initializeApp(firebaseConfig);
-const db   = getFirestore(app);
+/* ══════════════════════════════════════
+  INIT
+══════════════════════════════════════ */
+const app  = initializeApp(FIREBASE_CONFIG);
 const auth = getAuth(app);
+const db   = getFirestore(app);
 
-/* ─── STATE ─── */
-let vehiculos = [], rentas = [], gastos = [], tiposGastoExtra = [];
-let currentVeh = null, currentRenta = null;
-let vehFilter  = 'todos', rentaFilter = 'todas';
-let editMode   = false;
-let uploadedUrls = [];
-let chartsReady  = false;
-let ingChart, gasChart;
-let finPeriod = null; // { year, month } or null = all time
-let currentUser = null;
-
-/* ─── UNSUBS ─── */
+/* ══════════════════════════════════════
+  STATE
+══════════════════════════════════════ */
+let vehiculos      = [];
+let rentas         = [];
+let gastos         = [];
+let tiposGastoExtra = [];
+let currentVeh     = null;
+let editMode       = false;
+let uploadedUrls   = [];
+let vehFilter      = "todos";
+let rentaFilter    = "todas";
+let selectedRentaId = null;
 let unsubVeh, unsubRentas, unsubGastos, unsubTipos;
+let chartIG = null, chartVeh = null;
+let chartsReady = false;
+let selMonth = null; // { year, month }
 
-/* ─── EXPOSE GLOBALS ─── */
-Object.assign(window, {
-  navigate, setFilter2, setNav, setRentaFilter,
-  doLogin, doLogout, togglePass,
-  saveVeh, checkTipoOtro, handleImages,
-  saveRenta, calcRenta, openNewRenta, completeRenta,
-  saveGasto, addGastoType, openNewGasto, checkGastoOtro,
-  changeStatus, editVeh, showVehModal,
-  closeModal, confirmDelVeh, delVeh,
-  renderVehs, renderGastos
-});
+/* ══════════════════════════════════════
+  UTILS
+══════════════════════════════════════ */
+const $ = id => document.getElementById(id);
+const val = id => ($( id )?.value || "").trim();
+const setText = (id, v) => { const e = $(id); if(e) e.textContent = v; };
+const setVal  = (id, v) => { const e = $(id); if(e) e.value = v ?? ""; };
 
-/* ══════════════════ AUTH ══════════════════ */
+function toNum(v) {
+  const n = parseFloat(String(v ?? 0).replace(/,/g,""));
+  return isNaN(n) ? 0 : n;
+}
+function fmtMoney(n) {
+  return "$" + toNum(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,",");
+}
+function stLabel(s) {
+  return { disponible:"Disponible", rentado:"Rentado", mantenimiento:"Mantenimiento" }[s] ?? s;
+}
+function parseDate(s) {
+  if (!s) return null;
+  const d = new Date(s + "T00:00:00");
+  return isNaN(d.getTime()) ? null : d;
+}
+function calcRentaDays(ini, fin) {
+  const ms = new Date(fin).getTime() - new Date(ini).getTime();
+  if (ms <= 0) return { dias: 0 };
+  return { dias: Math.ceil(ms / 86400000) };
+}
+function emptyHTML(ico, t, s) {
+  return `<div class="empty"><div class="empty-ico"><i class="fas ${ico}"></i></div><div class="empty-t">${t}</div><div class="empty-s">${s}</div></div>`;
+}
+function greet() {
+  const h = new Date().getHours();
+  return h < 12 ? "Buenos días" : h < 18 ? "Buenas tardes" : "Buenas noches";
+}
+function setLoading(btn, on) {
+  if (!btn) return;
+  btn.disabled = on;
+  if (on) btn.dataset.orig = btn.innerHTML;
+  btn.innerHTML = on ? '<div class="lring" style="width:20px;height:20px;border-width:2px"></div>' : btn.dataset.orig;
+}
+
+/* ══════════════════════════════════════
+  TOAST
+══════════════════════════════════════ */
+window.toast = function(type, msg) {
+  const icons = { s:"fa-circle-check", e:"fa-circle-xmark", i:"fa-circle-info", w:"fa-triangle-exclamation" };
+  const el = document.createElement("div");
+  el.className = `toast ${type}`;
+  el.innerHTML = `<i class="fas ${icons[type]||'fa-bell'}"></i>${msg}`;
+  $("toast-c").appendChild(el);
+  setTimeout(() => el.remove(), 3200);
+};
+
+/* ══════════════════════════════════════
+  AUTH
+══════════════════════════════════════ */
+window.togglePass = function() {
+  const inp = $("l-pass"), ico = $("eye-ico");
+  inp.type = inp.type === "password" ? "text" : "password";
+  ico.className = inp.type === "text" ? "fas fa-eye-slash" : "fas fa-eye";
+};
+
+window.doLogin = async function(e) {
+  e.preventDefault();
+  const email = val("l-email"), pass = val("l-pass");
+  if (!email || !pass) { toast("e","Ingresa correo y contraseña"); return; }
+  const btn = $("login-btn"); setLoading(btn, true);
+  try {
+    const persistence = $("rem").checked ? browserLocalPersistence : browserSessionPersistence;
+    await setPersistence(auth, persistence);
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch (err) {
+    const msgs = { "auth/invalid-credential":"Credenciales incorrectas", "auth/user-not-found":"Usuario no encontrado", "auth/wrong-password":"Contraseña incorrecta", "auth/invalid-email":"Correo inválido", "auth/too-many-requests":"Demasiados intentos, espera un momento" };
+    toast("e", msgs[err.code] || "Error al iniciar sesión");
+    setLoading(btn, false);
+  }
+};
+
+window.doLogout = function() {
+  signOut(auth);
+  toast("i","Sesión cerrada");
+};
+
 onAuthStateChanged(auth, user => {
-  hideLoader();
+  $("gloader").style.display = "none";
   if (user) {
-    currentUser = user;
-    const nm = user.displayName || user.email.split('@')[0];
-    setUI(nm, user.email);
-    setGreeting();
+    const name = user.displayName || user.email?.split("@")[0] || "Encargado";
+    const initials = name.substring(0,1).toUpperCase();
+    setText("uname", "¡Hola, " + name + "!");
+    setText("greeting", greet());
+    setText("prof-name", name);
+    setText("prof-email", user.email || "—");
+    if ($("ava")) $("ava").textContent = initials;
+    if ($("prof-ava")) $("prof-ava").textContent = initials;
+    $("bot-nav").style.display = "flex";
+    showScreen("home");
     startListeners();
-    navigate('home');
   } else {
-    navigate('login');
+    $("bot-nav").style.display = "none";
+    showScreen("login");
+    stopListeners();
   }
 });
 
-function setUI(nm, email) {
-  const ini = nm[0].toUpperCase();
-  setText('uname', `¡Hola, ${cap(nm)}!`);
-  setText('ava', ini); setText('p-ava', ini);
-  setText('p-name', cap(nm)); setText('p-email', email);
-}
-
-async function doLogin(e) {
-  const btn = e.currentTarget;
-  const email = val('l-email'), pass = val('l-pass');
-  if (!email || !pass) { toast('e','Completa todos los campos','<i class="fas fa-exclamation-circle"></i>'); return; }
-  setLoading(btn, true);
-  try {
-    await signInWithEmailAndPassword(auth, email, pass);
-    toast('s','Sesión iniciada correctamente','<i class="fas fa-circle-check"></i>');
-  } catch { toast('e','Credenciales incorrectas','<i class="fas fa-circle-xmark"></i>'); setLoading(btn, false); }
-}
-
-async function doLogout() {
-  await signOut(auth);
-  toast('i','Sesión cerrada','<i class="fas fa-right-from-bracket"></i>');
-}
-
-/* ══════════════════ FIRESTORE LISTENERS ══════════════════ */
+/* ══════════════════════════════════════
+  FIRESTORE LISTENERS
+══════════════════════════════════════ */
 function startListeners() {
-  const vQ = query(collection(db,'vehiculos'), orderBy('createdAt','desc'));
+  const vQ = query(collection(db,"vehiculos"), orderBy("createdAt","desc"));
   unsubVeh = onSnapshot(vQ, snap => {
-    vehiculos = snap.docs.map(d => ({id:d.id, ...d.data()}));
+    vehiculos = snap.docs.map(d => ({ id:d.id, ...d.data() }));
     updateStats(); renderRecentVehs(); renderVehs();
     buildAlerts(); populateVehSelects();
+    updateFinanceHeader();
     if (chartsReady) refreshCharts();
-  }, () => { toast('e','Sin conexión. Datos offline.','<i class="fas fa-wifi"></i>'); });
+  }, () => toast("w","Sin conexión. Usando datos offline."));
 
-  const rQ = query(collection(db,'rentas'), orderBy('createdAt','desc'));
+  const rQ = query(collection(db,"rentas"), orderBy("createdAt","desc"));
   unsubRentas = onSnapshot(rQ, snap => {
-    rentas = snap.docs.map(d => ({id:d.id, ...d.data()}));
-    renderRentas(); renderDetalleRentas();
-    updateFinanceHeader();
+    rentas = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+    renderRentas(); renderDetalleRentas(); updateFinanceHeader();
     if (chartsReady) refreshCharts();
   });
 
-  const gQ = query(collection(db,'gastos'), orderBy('fecha','desc'));
+  const gQ = query(collection(db,"gastos"), orderBy("fecha","desc"));
   unsubGastos = onSnapshot(gQ, snap => {
-    gastos = snap.docs.map(d => ({id:d.id, ...d.data()}));
-    renderGastos(); renderDetalleGastos();
-    updateFinanceHeader();
+    gastos = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+    renderGastos(); renderDetalleGastos(); updateFinanceHeader();
     if (chartsReady) refreshCharts();
   });
 
-  const tQ = collection(db,'tiposGasto');
+  const tQ = collection(db,"tiposGasto");
   unsubTipos = onSnapshot(tQ, snap => {
-    tiposGastoExtra = snap.docs.map(d => ({id:d.id, ...d.data()}));
+    tiposGastoExtra = snap.docs.map(d => ({ id:d.id, ...d.data() }));
     renderTiposCustom();
   });
 }
 
-/* ══════════════════ STATS ══════════════════ */
+function stopListeners() {
+  [unsubVeh, unsubRentas, unsubGastos, unsubTipos].forEach(u => u?.());
+}
+
+/* ══════════════════════════════════════
+  NAVIGATION
+══════════════════════════════════════ */
+const mainScreens = ["home","vehiculos","rentas","gastos","finanzas","perfil"];
+
+window.navigate = function(screen) {
+  showScreen(screen);
+  const navMap = { home:"home", vehiculos:"vehiculos", detalle:"vehiculos", agregar:"vehiculos",
+                   rentas:"rentas", "nueva-renta":"rentas",
+                   gastos:"gastos", "nuevo-gasto":"gastos",
+                   finanzas:"finanzas", perfil:"perfil", alertas:"home" };
+  const active = navMap[screen] || screen;
+  document.querySelectorAll(".nav-i").forEach(n => n.classList.remove("on"));
+  const navEl = $("nav-" + active);
+  if (navEl) navEl.classList.add("on");
+
+  if (screen === "vehiculos")     renderVehs();
+  if (screen === "rentas")        renderRentas();
+  if (screen === "gastos")        renderGastos();
+  if (screen === "finanzas")      { buildMonthTabs(); setTimeout(renderFinances, 80); }
+  if (screen === "alertas")       renderAlertas();
+  if (screen === "agregar" && !editMode) resetVehForm();
+  if (screen === "nueva-renta")   resetRentaForm();
+  if (screen === "nuevo-gasto")   resetGastoForm();
+};
+
+function showScreen(s) {
+  document.querySelectorAll(".screen").forEach(el => el.classList.remove("active"));
+  const el = $("screen-" + s);
+  if (el) el.classList.add("active");
+}
+
+window.filterAndGo = function(f) {
+  vehFilter = f;
+  document.querySelectorAll("#veh-chips .chip").forEach(c => c.classList.remove("on"));
+  const t = document.querySelector(`[data-f="${f}"]`);
+  if (t) t.classList.add("on");
+  navigate("vehiculos");
+};
+
+/* ══════════════════════════════════════
+  MODALS
+���═════════════════════════════════════ */
+window.closeModal = function(id) { $(id).style.display = "none"; };
+window.showVehModal = function() { $("veh-modal").style.display = "block"; };
+window.confirmDelVeh = function() {
+  closeModal("veh-modal");
+  if (!currentVeh) return;
+  const rentasVeh  = rentas.filter(r => r.vehiculoId === currentVeh.id && r.estado === "activa");
+  const gastosVeh  = gastos.filter(g => g.vehiculoId === currentVeh.id);
+  const rentasHist = rentas.filter(r => r.vehiculoId === currentVeh.id);
+  if (rentasVeh.length > 0) {
+    $("del-warn").textContent = "⚠ Este vehículo tiene " + rentasVeh.length + " renta(s) activa(s). No se puede eliminar.";
+    $("del-confirm-btn").style.display = "none";
+  } else {
+    const warn = [];
+    if (rentasHist.length) warn.push(rentasHist.length + " renta(s) en historial");
+    if (gastosVeh.length) warn.push(gastosVeh.length + " gasto(s) registrado(s)");
+    $("del-warn").textContent = warn.length ? "ℹ Tiene: " + warn.join(", ") + ". El historial se conservará." : "";
+    $("del-confirm-btn").style.display = "block";
+  }
+  $("confirm-del").style.display = "block";
+};
+
+/* ══════════════════════════════════════
+  STATS
+══════════════════════════════════════ */
 function updateStats() {
   const tot = vehiculos.length;
-  const av  = vehiculos.filter(v => v.estado==='disponible').length;
-  const re  = vehiculos.filter(v => v.estado==='rentado').length;
-  const mn  = vehiculos.filter(v => v.estado==='mantenimiento').length;
-  animN('s-total',tot); animN('s-avail',av); animN('s-rented',re); animN('s-maint',mn);
+  const av  = vehiculos.filter(v => v.estado==="disponible").length;
+  const re  = vehiculos.filter(v => v.estado==="rentado").length;
+  const mn  = vehiculos.filter(v => v.estado==="mantenimiento").length;
+  setText("s-total", tot); setText("s-avail", av);
+  setText("s-rented", re); setText("s-maint", mn);
+  const bd = $("alert-count");
+  if (bd) { bd.textContent = mn; bd.style.display = mn > 0 ? "flex" : "none"; }
 }
 
-/* ─── Finance header ─── */
+/* ══════════════════════════════════════
+  FINANCE HEADER
+══════════════════════════════════════ */
 function updateFinanceHeader() {
-  const {ing,gas,bal} = calcFinances(null);
-  setText('h-ing', fmtMoney(ing));
-  setText('h-gas', fmtMoney(gas));
-  setText('h-bal', fmtMoney(Math.abs(bal)));
-  const bc = document.getElementById('h-bal-card');
-  if (bc) { bc.className = bal >= 0 ? 'fin-card bal' : 'fin-card bal loss'; }
+  const now = new Date();
+  const { ing, gas, bal } = calcFinances({ year: now.getFullYear(), month: now.getMonth() });
+  setText("h-ing", fmtMoney(ing));
+  setText("h-gas", fmtMoney(gas));
+  setText("h-bal", fmtMoney(Math.abs(bal)));
+  const bc = $("h-bal-card");
+  if (bc) bc.className = bal >= 0 ? "fin-card bal" : "fin-card bal loss";
 }
 
-/* ══════════════════ FINANCES MATH ══════════════════ */
-/**
- * Calculates finances for a given period.
- * period: null = all time | { year, month } = specific month (month 0-indexed)
- * Returns { ing, gas, bal }
- *
- * INGRESOS: Sum of renta.total where renta.estado === 'completada' AND within period
- * GASTOS:   Sum of gasto.costo (Number) within period
- * BALANCE:  INGRESOS - GASTOS
- */
+/* ══════════════════════════════════════
+  FINANCE MATH — PRECISE
+  INGRESOS: rentas completadas (by fechaFin)
+  GASTOS:   sum of gasto.costo
+  BALANCE:  INGRESOS − GASTOS
+  All rounded to 2 decimals via Math.round(x*100)/100
+══════════════════════════════════════ */
 function calcFinances(period) {
-  const rentasFilt = rentas.filter(r => {
-    if (r.estado !== 'completada') return false;
+  const rFilt = rentas.filter(r => {
+    if (r.estado !== "completada") return false;
     if (!period) return true;
     const d = parseDate(r.fechaFin || r.fechaInicio);
     return d && d.getFullYear()===period.year && d.getMonth()===period.month;
   });
-  const gastosFilt = gastos.filter(g => {
+  const gFilt = gastos.filter(g => {
     if (!period) return true;
     const d = parseDate(g.fecha);
     return d && d.getFullYear()===period.year && d.getMonth()===period.month;
   });
-
-  // sum as floats with rounding to avoid JS floating-point errors
-  const ing = Math.round(rentasFilt.reduce((s,r) => s + toNum(r.total), 0) * 100) / 100;
-  const gas = Math.round(gastosFilt.reduce((s,g) => s + toNum(g.costo), 0) * 100) / 100;
+  const ing = Math.round(rFilt.reduce((s,r) => s + toNum(r.total), 0) * 100) / 100;
+  const gas = Math.round(gFilt.reduce((s,g) => s + toNum(g.costo), 0) * 100) / 100;
   const bal = Math.round((ing - gas) * 100) / 100;
-  return { ing, gas, bal };
+  return { ing, gas, bal, rentasFilt: rFilt, gastosFilt: gFilt };
 }
 
-/**
- * Calculate rental total.
- * dias = ceil((fechaFin - fechaInicio) / 86400000)
- * total = dias * precioPorDia
- * Both rounded to 2 decimals.
- */
-function calcRentaDays(inicio, fin) {
-  const ms  = new Date(fin) - new Date(inicio);
-  if (ms <= 0) return { dias: 0, total: 0 };
-  const dias  = Math.ceil(ms / 86400000);
-  return { dias };
-}
-
-/* ══════════════════ NAVIGATE ══════════════════ */
-function navigate(screen) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const el = document.getElementById(`screen-${screen}`);
-  if (!el) return;
-  el.classList.add('active');
-  if (screen==='vehiculos')   renderVehs();
-  if (screen==='rentas')      renderRentas();
-  if (screen==='gastos')      renderGastos();
-  if (screen==='finanzas')    { buildMonthTabs(); setTimeout(()=>{ renderFinances(); }, 60); }
-  if (screen==='alertas')     renderAlertas();
-  if (screen==='agregar' && !editMode) resetVehForm();
-  if (screen==='nueva-renta') resetRentaForm();
-  if (screen==='nuevo-gasto') resetGastoForm();
-}
-
-function setNav(screen) { navigate(screen); }
-
-/* ══════════════════ VEHICLES ══════════════════ */
+/* ══════════════════════════════════════
+  VEHICLES
+══════════════════════════════════════ */
 function getVehFiltered() {
-  const q = val('veh-search').toLowerCase();
+  const q = val("veh-search").toLowerCase();
   return vehiculos.filter(v => {
-    const mf = vehFilter==='todos' || v.estado===vehFilter;
-    const ms = !q || (`${v.marca}${v.modelo}${v.placa||''}`).toLowerCase().includes(q);
+    const mf = vehFilter==="todos" || v.estado===vehFilter;
+    const ms = !q || (`${v.marca}${v.modelo}${v.placa||""}`).toLowerCase().includes(q);
     return mf && ms;
   });
 }
 
-function renderVehs() {
-  const el = document.getElementById('veh-list');
-  if (!el) return;
+window.renderVehs = function() {
+  const el = $("veh-list"); if (!el) return;
   const list = getVehFiltered();
-  el.innerHTML = list.length
-    ? list.map(v => vehCardHTML(v)).join('')
-    : emptyHTML('fa-car-side','Sin resultados','Prueba otro filtro o búsqueda');
-}
+  el.innerHTML = list.length ? list.map(v => vehCardHTML(v)).join("") : emptyHTML("fa-car-side","Sin resultados","Prueba otro filtro");
+};
 
 function renderRecentVehs() {
-  const el = document.getElementById('recent-list');
-  if (!el) return;
-  const list = vehiculos.slice(0,4);
-  el.innerHTML = list.length
-    ? list.map(v => vehCardHTML(v)).join('')
-    : emptyHTML('fa-car','Sin vehículos','Agrega tu primer vehículo');
+  const el = $("recent-list"); if (!el) return;
+  const list = vehiculos.slice(0, 4);
+  el.innerHTML = list.length ? list.map(v => vehCardHTML(v)).join("") : emptyHTML("fa-car","Sin vehículos","Agrega tu primer vehículo");
 }
 
 function vehCardHTML(v) {
   const imgs = v.imagenes || [];
   const img  = imgs.length ? `<img src="${imgs[0]}" alt="${v.marca}" onerror="this.parentNode.innerHTML='<i class=\\'fas fa-car\\'></i>'"/>` : `<i class="fas fa-car"></i>`;
-  const placa = v.placa ? `<div class="vplate">${v.placa}</div>` : '';
-  const price = v.precioPorDia ? `<div class="vprice">$${toNum(v.precioPorDia).toFixed(2)}/día</div>` : '';
   return `<div class="vcard ${v.estado}" onclick="openVeh('${v.id}')">
     <div class="vimg">${img}</div>
     <div class="vinfo">
-      <div class="vname">${v.marca} ${v.modelo} ${v.ano||''}</div>
-      ${placa}${price}
+      <div class="vname">${v.marca} ${v.modelo} ${v.ano||""}</div>
+      ${v.placa ? `<div class="vplate">${v.placa}</div>` : ""}
+      ${v.precioPorDia ? `<div class="vprice">${fmtMoney(v.precioPorDia)}/día</div>` : ""}
       <div class="sbadge ${v.estado}"><span class="sdot"></span>${stLabel(v.estado)}</div>
     </div>
-    <i class="fas fa-chevron-right" style="color:var(--t3);font-size:11px;margin-left:4px"></i>
+    <i class="fas fa-chevron-right" style="color:var(--t3);font-size:10px;margin-left:4px"></i>
   </div>`;
 }
 
-function openVeh(id) {
+window.openVeh = function(id) {
   currentVeh = vehiculos.find(v => v.id===id);
   if (!currentVeh) return;
   fillDetalleVeh(currentVeh);
-  navigate('detalle');
-}
+  navigate("detalle");
+};
 
 function fillDetalleVeh(v) {
-  const imgs = v.imagenes||[];
-  const cw = document.getElementById('d-carousel-wrap');
-  const ph = document.getElementById('d-ph');
-  if (imgs.length) {
-    cw.style.display='block'; ph.style.display='none';
-    buildCarousel(imgs);
-  } else {
-    cw.style.display='none'; ph.style.display='flex';
-  }
-  setText('d-name', `${v.marca} ${v.modelo} ${v.ano||''}`);
-  const plate = document.getElementById('d-plate');
-  plate.textContent = v.placa || '';
-  plate.style.display = v.placa ? '' : 'none';
-  const priceEl = document.getElementById('d-price');
-  priceEl.textContent = v.precioPorDia ? `$${toNum(v.precioPorDia).toFixed(2)} / día` : '';
-  setText('d-marca', v.marca||'—'); setText('d-modelo', v.modelo||'—');
-  setText('d-ano', v.ano||'—');    setText('d-color', v.color||'—');
-  setText('d-km', v.km ? `${Number(v.km).toLocaleString()} km` : '—');
-  setText('d-comb', v.combustible||'—');
-  setSsBadge(v.estado);
-  setSsBtns(v.estado);
+  const imgs = v.imagenes || [];
+  const cw = $("d-carousel-wrap"), ph = $("d-ph");
+  if (imgs.length) { cw.style.display="block"; ph.style.display="none"; buildCarousel(imgs); }
+  else             { cw.style.display="none";  ph.style.display="flex"; }
+  setText("d-name", `${v.marca} ${v.modelo} ${v.ano||""}`);
+  const plate = $("d-plate");
+  plate.textContent = v.placa || ""; plate.style.display = v.placa ? "" : "none";
+  const priceEl = $("d-price");
+  priceEl.textContent = v.precioPorDia ? `${fmtMoney(v.precioPorDia)} / día` : "";
+  setText("d-marca", v.marca||"—"); setText("d-modelo", v.modelo||"—");
+  setText("d-ano", v.ano||"—");    setText("d-color", v.color||"—");
+  setText("d-km", v.km ? Number(v.km).toLocaleString() + " km" : "—");
+  setText("d-comb", v.combustible||"—");
+  setSsBadge(v.estado); setSsBtns(v.estado);
   renderDetalleRentas(); renderDetalleGastos();
 }
 
 function buildCarousel(imgs) {
-  const car = document.getElementById('d-carousel');
-  const dots = document.getElementById('carousel-dots');
+  const car = $("d-carousel"), dots = $("carousel-dots");
   let idx = 0;
-  car.innerHTML = imgs.map(u => `<img class="d-carousel-img" src="${u}" onerror="this.style.display='none'"/>`).join('');
-  dots.innerHTML = imgs.map((_,i) => `<span class="cdot${i===0?' on':''}"></span>`).join('');
-  car.ontouchstart = null;
+  car.innerHTML = imgs.map(u => `<img class="d-carousel-img" src="${u}" onerror="this.style.display='none'"/>`).join("");
+  dots.innerHTML = imgs.map((_,i) => `<span class="cdot${i===0?" on":""}"></span>`).join("");
   let startX = 0;
-  car.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
-  car.addEventListener('touchend', e => {
+  car.ontouchstart = null; car.ontouchend = null;
+  car.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, {passive:true});
+  car.addEventListener("touchend", e => {
     const dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 40) { idx = dx<0 ? Math.min(idx+1,imgs.length-1) : Math.max(idx-1,0); }
-    car.style.transform=`translateX(-${idx*100}%)`;
-    dots.querySelectorAll('.cdot').forEach((d,i)=>d.classList.toggle('on',i===idx));
+    if (Math.abs(dx) > 40) idx = dx < 0 ? Math.min(idx+1,imgs.length-1) : Math.max(idx-1,0);
+    car.style.transform = `translateX(-${idx*100}%)`;
+    dots.querySelectorAll(".cdot").forEach((d,i) => d.classList.toggle("on",i===idx));
   }, {passive:true});
 }
 
 function setSsBadge(st) {
-  const b = document.getElementById('d-sbadge');
+  const b = $("d-sbadge");
   b.className = `sbadge ${st}`;
   b.innerHTML = `<span class="sdot"></span>${stLabel(st)}`;
 }
 function setSsBtns(st) {
-  ['disponible','rentado','mantenimiento'].forEach(s => {
-    document.getElementById(`ss-${s[0]}`).classList.toggle('on', s===st);
+  ["d","r","m"].forEach((key,i) => {
+    const states = ["disponible","rentado","mantenimiento"];
+    $("ss-"+key)?.classList.toggle("on", states[i]===st);
   });
 }
 
-async function changeStatus(ns) {
+window.changeStatus = async function(ns) {
   if (!currentVeh) return;
   setSsBtns(ns); setSsBadge(ns); currentVeh.estado = ns;
   try {
-    await updateDoc(doc(db,'vehiculos',currentVeh.id), {estado:ns});
-    toast('s','Estado actualizado','<i class="fas fa-circle-check"></i>');
-  } catch { toast('e','Error al actualizar','<i class="fas fa-circle-xmark"></i>'); }
-}
+    await updateDoc(doc(db,"vehiculos",currentVeh.id), { estado: ns });
+    toast("s","Estado actualizado");
+  } catch { toast("e","Error al actualizar"); }
+};
 
-function setFilter2(f, el) {
+window.setFilter2 = function(f, el) {
   vehFilter = f;
-  document.querySelectorAll('#veh-chips .chip').forEach(c => c.classList.remove('on'));
-  if (el) el.classList.add('on');
-  else { const t = document.querySelector(`[data-f="${f}"]`); if(t) t.classList.add('on'); }
+  document.querySelectorAll("#veh-chips .chip").forEach(c => c.classList.remove("on"));
+  if (el) el.classList.add("on");
   renderVehs();
-  if (document.getElementById('screen-vehiculos').classList.contains('active')) {/* already there */}
-  else navigate('vehiculos');
-}
+};
 
-function showVehModal() { document.getElementById('veh-modal').style.display='block'; }
-function confirmDelVeh() { closeModal('veh-modal'); document.getElementById('confirm-del').style.display='block'; }
-async function delVeh() {
-  if (!currentVeh) return; closeModal('confirm-del');
+/* ── DELETE VEHICLE ── */
+window.delVeh = async function() {
+  if (!currentVeh) return;
+  closeModal("confirm-del");
+  const rentasActivas = rentas.filter(r => r.vehiculoId===currentVeh.id && r.estado==="activa");
+  if (rentasActivas.length > 0) { toast("e","No se puede eliminar: tiene rentas activas"); return; }
   try {
-    await deleteDoc(doc(db,'vehiculos',currentVeh.id));
-    toast('s','Vehículo eliminado','<i class="fas fa-trash"></i>'); navigate('vehiculos');
-  } catch { toast('e','Error al eliminar','<i class="fas fa-circle-xmark"></i>'); }
-}
+    await deleteDoc(doc(db,"vehiculos",currentVeh.id));
+    toast("s","Vehículo eliminado");
+    currentVeh = null;
+    navigate("vehiculos");
+  } catch { toast("e","Error al eliminar"); }
+};
 
-/* ── ADD / EDIT VEH ── */
-function resetVehForm() {
+/* ── ADD / EDIT VEHICLE FORM ── */
+window.resetVehForm = function() {
   editMode = false; uploadedUrls = [];
-  setText('form-title','Agregar Vehículo');
-  document.getElementById('save-btn').innerHTML='<i class="fas fa-floppy-disk"></i>Guardar Vehículo';
-  ['f-marca','f-modelo','f-ano','f-placa','f-color','f-km','f-precio','f-tipo-otro','f-ultimo-mant'].forEach(id=>{
-    const e=document.getElementById(id); if(e) e.value='';
-  });
-  ['f-tipo','f-comb','f-estado'].forEach(id=>{const e=document.getElementById(id);if(e)e.selectedIndex=0;});
-  document.getElementById('img-previews').innerHTML='';
-  resetUpZone();
-}
+  setText("form-title","Agregar Vehículo");
+  $("save-btn").innerHTML = '<i class="fas fa-floppy-disk"></i>Guardar Vehículo';
+  ["f-marca","f-modelo","f-ano","f-placa","f-color","f-km","f-precio","f-tipo-otro","f-ultimo-mant"].forEach(id => { const e=$(id); if(e) e.value=""; });
+  ["f-tipo","f-comb","f-estado"].forEach(id => { const e=$(id); if(e) e.selectedIndex=0; });
+  $("img-previews").innerHTML = ""; resetUpZone();
+};
 
-function editVeh() {
+window.editVeh = function() {
   if (!currentVeh) return;
   const v = currentVeh;
   editMode = true; uploadedUrls = [...(v.imagenes||[])];
-  setText('form-title','Editar Vehículo');
-  document.getElementById('save-btn').innerHTML='<i class="fas fa-pen"></i>Actualizar';
-  setVal('f-marca',v.marca); setVal('f-modelo',v.modelo); setVal('f-ano',v.ano);
-  setVal('f-placa',v.placa||''); setVal('f-color',v.color||''); setVal('f-km',v.km||'');
-  setVal('f-precio',v.precioPorDia||''); setVal('f-comb',v.combustible||'');
-  setVal('f-ultimo-mant',v.ultimoMantenimiento||''); setVal('f-estado',v.estado||'disponible');
-  // tipo
-  const tipoEl = document.getElementById('f-tipo');
-  const tipoOpts = ['Sedán','SUV','Pickup','Van','Camioneta'];
-  if (tipoOpts.includes(v.tipo)) { tipoEl.value = v.tipo; document.getElementById('tipo-otro-wrap').style.display='none'; }
-  else if (v.tipo) { tipoEl.value='Otro'; setVal('f-tipo-otro',v.tipo); document.getElementById('tipo-otro-wrap').style.display='block'; }
-  // previews
-  const pv = document.getElementById('img-previews');
-  pv.innerHTML = uploadedUrls.map((u,i)=>imgPreviewHTML(u,i)).join('');
+  setText("form-title","Editar Vehículo");
+  $("save-btn").innerHTML = '<i class="fas fa-pen"></i>Actualizar Vehículo';
+  setVal("f-marca",v.marca); setVal("f-modelo",v.modelo); setVal("f-ano",v.ano);
+  setVal("f-placa",v.placa||""); setVal("f-color",v.color||""); setVal("f-km",v.km||"");
+  setVal("f-precio",v.precioPorDia||""); setVal("f-comb",v.combustible||"");
+  setVal("f-ultimo-mant",v.ultimoMantenimiento||""); setVal("f-estado",v.estado||"disponible");
+  const tipoEl = $("f-tipo");
+  const tiposBase = ["Sedán","SUV","Pickup","Van","Camioneta"];
+  if (tiposBase.includes(v.tipo)) { tipoEl.value = v.tipo; $("tipo-otro-wrap").style.display="none"; }
+  else if (v.tipo) { tipoEl.value = "Otro"; setVal("f-tipo-otro",v.tipo); $("tipo-otro-wrap").style.display="block"; }
+  $("img-previews").innerHTML = uploadedUrls.map((u,i) => imgPreviewHTML(u,i)).join("");
   resetUpZone();
-  navigate('agregar');
-}
+  navigate("agregar");
+};
 
-function checkTipoOtro() {
-  const v = document.getElementById('f-tipo').value;
-  document.getElementById('tipo-otro-wrap').style.display = v==='Otro' ? 'block' : 'none';
-}
+window.checkTipoOtro = function() {
+  $("tipo-otro-wrap").style.display = $("f-tipo").value === "Otro" ? "block" : "none";
+};
 
-async function handleImages(e) {
+window.handleImages = async function(e) {
   const files = Array.from(e.target.files);
   if (!files.length) return;
-  const zone = document.getElementById('upzone');
-  // create overlay
-  let ov = document.createElement('div'); ov.className='up-prog'; ov.id='up-ov';
-  ov.innerHTML=`<div class="lring" style="width:28px;height:28px;border-width:2px"></div><p>Subiendo ${files.length} imagen${files.length>1?'s':''}...</p><div class="prog-bar"><div class="prog-fill" id="prog-f"></div></div>`;
+  const zone = $("upzone");
+  let ov = document.createElement("div"); ov.className="up-prog"; ov.id="up-ov";
+  ov.innerHTML = `<div class="lring" style="width:24px;height:24px;border-width:2px"></div><p>Subiendo ${files.length} imagen${files.length>1?"s":""}...</p><div class="prog-bar"><div class="prog-fill" id="prog-f"></div></div>`;
   zone.appendChild(ov);
-  let done=0;
+  let done = 0;
   for (const file of files) {
-    const url = await uploadToCloudinary(file, pct=>{
-      const fill = document.getElementById('prog-f');
-      if (fill) fill.style.width = Math.round((done/files.length)*100 + pct/files.length) + '%';
+    const url = await uploadToCloudinary(file, pct => {
+      const f = $("prog-f"); if(f) f.style.width = Math.round((done/files.length)*100 + pct/files.length) + "%";
     });
     if (url) { uploadedUrls.push(url); addImgPreview(url, uploadedUrls.length-1); }
     done++;
   }
   ov.remove(); resetUpZone();
-  toast('s',`${uploadedUrls.length} imagen${uploadedUrls.length>1?'s':''} lista${uploadedUrls.length>1?'s':''}`,`<i class="fas fa-image"></i>`);
-  e.target.value='';
-}
+  toast("s", `${uploadedUrls.length} imagen${uploadedUrls.length>1?"es":""} lista${uploadedUrls.length>1?"s":""}`);
+  e.target.value = "";
+};
 
 async function uploadToCloudinary(file, onProgress) {
   return new Promise(resolve => {
-    const xhr = new XMLHttpRequest();
-    const fd  = new FormData();
-    fd.append('file', file); fd.append('upload_preset', CLOUD_PRESET);
-    xhr.upload.onprogress = e => { if(e.lengthComputable) onProgress(e.loaded/e.total*100); };
-    xhr.onload = () => {
-      try { const d=JSON.parse(xhr.responseText); resolve(d.secure_url||null); }
-      catch { resolve(null); }
-    };
-    xhr.onerror = () => {
-      // fallback: use object URL (local preview only)
-      resolve(URL.createObjectURL(file));
-    };
-    xhr.open('POST',`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`);
+    const xhr = new XMLHttpRequest(), fd = new FormData();
+    fd.append("file", file); fd.append("upload_preset", CLOUD_PRESET);
+    xhr.upload.onprogress = e => { if(e.lengthComputable && onProgress) onProgress(e.loaded/e.total*100); };
+    xhr.onload = () => { try { const d=JSON.parse(xhr.responseText); resolve(d.secure_url||null); } catch { resolve(null); } };
+    xhr.onerror = () => resolve(URL.createObjectURL(file));
+    xhr.open("POST", `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`);
     xhr.send(fd);
   });
 }
 
 function addImgPreview(url, idx) {
-  const pv = document.getElementById('img-previews');
-  const div = document.createElement('div');
-  div.className='img-prev-item'; div.id=`prev-${idx}`;
-  div.innerHTML=`<img src="${url}"/><div class="rm-img" onclick="removeImg(${idx})"><i class="fas fa-times"></i></div>`;
+  const pv = $("img-previews");
+  const div = document.createElement("div"); div.className="img-prev-item"; div.id=`prev-${idx}`;
+  div.innerHTML = `<img src="${url}"/><div class="rm-img" onclick="removeImg(${idx})"><i class="fas fa-times"></i></div>`;
   pv.appendChild(div);
 }
 window.removeImg = function(idx) {
-  uploadedUrls.splice(idx,1);
-  const pv=document.getElementById('img-previews');
-  pv.innerHTML=uploadedUrls.map((u,i)=>imgPreviewHTML(u,i)).join('');
+  uploadedUrls.splice(idx, 1);
+  $("img-previews").innerHTML = uploadedUrls.map((u,i) => imgPreviewHTML(u,i)).join("");
 };
 function imgPreviewHTML(u,i) {
   return `<div class="img-prev-item" id="prev-${i}"><img src="${u}"/><div class="rm-img" onclick="removeImg(${i})"><i class="fas fa-times"></i></div></div>`;
 }
 function resetUpZone() {
-  const ico=document.getElementById('up-ico'),tx=document.getElementById('up-text'),ht=document.getElementById('up-hint');
-  if(ico) ico.style.display=''; if(tx) tx.textContent=uploadedUrls.length?`✓ ${uploadedUrls.length} imagen${uploadedUrls.length>1?'s':''} subida${uploadedUrls.length>1?'s':''}`:  'Subir imágenes';
-  if(ht) ht.style.display=uploadedUrls.length?'none':'';
+  const ico=$("up-ico"), tx=$("up-text"), ht=$("up-hint");
+  if (ico) ico.style.display="";
+  if (tx) tx.textContent = uploadedUrls.length ? `✓ ${uploadedUrls.length} imagen${uploadedUrls.length>1?"es":""} cargada${uploadedUrls.length>1?"s":""}` : "Subir imágenes";
+  if (ht) ht.style.display = uploadedUrls.length ? "none" : "";
 }
 
-async function saveVeh() {
-  const marca  = val('f-marca'), modelo = val('f-modelo'), ano = val('f-ano'), precio = val('f-precio');
-  if (!marca||!modelo||!ano) { toast('e','Completa Marca, Modelo y Año','<i class="fas fa-exclamation-circle"></i>'); return; }
-  if (!precio||toNum(precio)<=0) { toast('e','Ingresa el precio por día','<i class="fas fa-exclamation-circle"></i>'); return; }
-
-  let tipo = val('f-tipo');
-  if (tipo==='Otro') { tipo = val('f-tipo-otro').trim(); if(!tipo){toast('e','Especifica el tipo de vehículo','<i class="fas fa-exclamation-circle"></i>'); return;} }
+window.saveVeh = async function() {
+  const marca  = val("f-marca"), modelo = val("f-modelo"), ano = val("f-ano"), precio = val("f-precio");
+  if (!marca||!modelo||!ano) { toast("e","Completa Marca, Modelo y Año"); return; }
+  if (!precio || toNum(precio) <= 0) { toast("e","Ingresa el precio por día"); return; }
+  let tipo = val("f-tipo");
+  if (tipo==="Otro") { tipo = val("f-tipo-otro"); if(!tipo){toast("e","Especifica el tipo de vehículo");return;} }
 
   const data = {
-    marca, modelo, ano: val('f-ano'),
-    placa: val('f-placa').toUpperCase(),
-    color: val('f-color'),
-    km: toNum(val('f-km')),
-    precioPorDia: Math.round(toNum(precio)*100)/100,
+    marca, modelo, ano,
+    placa: val("f-placa").toUpperCase(),
+    color: val("f-color"),
+    km: toNum(val("f-km")),
+    precioPorDia: Math.round(toNum(precio) * 100) / 100,
     tipo,
-    combustible: val('f-comb'),
-    ultimoMantenimiento: val('f-ultimo-mant'),
-    estado: val('f-estado')||'disponible',
+    combustible: val("f-comb"),
+    ultimoMantenimiento: val("f-ultimo-mant"),
+    estado: val("f-estado") || "disponible",
     imagenes: uploadedUrls
   };
 
-  const btn=document.getElementById('save-btn');
-  setLoading(btn,true);
+  const btn = $("save-btn"); setLoading(btn, true);
   try {
     if (editMode && currentVeh) {
-      await updateDoc(doc(db,'vehiculos',currentVeh.id), data);
-      toast('s','Vehículo actualizado','<i class="fas fa-circle-check"></i>');
+      await updateDoc(doc(db,"vehiculos",currentVeh.id), data);
+      toast("s","Vehículo actualizado correctamente");
     } else {
       data.createdAt = serverTimestamp();
-      await addDoc(collection(db,'vehiculos'), data);
-      toast('s','Vehículo agregado','<i class="fas fa-circle-check"></i>');
+      await addDoc(collection(db,"vehiculos"), data);
+      toast("s","Vehículo agregado correctamente");
     }
-    navigate('vehiculos');
-  } catch(err) {
-    console.error(err); toast('e','Error al guardar','<i class="fas fa-circle-xmark"></i>');
-    setLoading(btn,false);
+    navigate("vehiculos");
+  } catch (err) {
+    console.error(err); toast("e","Error al guardar vehículo");
+    setLoading(btn, false);
   }
-}
+};
 
-/* ══════════════════ RENTALS ══════════════════ */
+/* ══════════════════════════════════════
+  RENTALS
+══════════════════════════════════════ */
 function populateVehSelects() {
-  const avail = vehiculos.filter(v => v.estado==='disponible');
+  const avail = vehiculos.filter(v => v.estado==="disponible");
   const all   = vehiculos;
-  const fillSel = (id, list, label='Seleccionar vehículo') => {
-    const el = document.getElementById(id); if(!el) return;
+  const fillSel = (id, list, label) => {
+    const el = $(id); if (!el) return;
+    const cur = el.value;
     el.innerHTML = `<option value="">${label}</option>` +
-      list.map(v=>`<option value="${v.id}">${v.marca} ${v.modelo} ${v.ano||''} ${v.placa?'· '+v.placa:''}</option>`).join('');
-    if (currentVeh) el.value = currentVeh.id;
+      list.map(v => `<option value="${v.id}">${v.marca} ${v.modelo} ${v.ano||""} ${v.placa?"· "+v.placa:""}</option>`).join("");
+    if (cur) el.value = cur;
+    if (currentVeh && !cur) el.value = currentVeh.id;
   };
-  fillSel('r-veh', avail, 'Seleccionar vehículo disponible');
-  fillSel('g-veh', all, 'General (sin vehículo específico)');
+  fillSel("r-veh", avail, "Seleccionar vehículo disponible");
+  fillSel("g-veh", all, "General (sin vehículo específico)");
 }
 
-function openNewRenta() {
-  navigate('nueva-renta');
-  if (currentVeh && currentVeh.estado==='disponible') {
-    const s=document.getElementById('r-veh'); if(s) s.value=currentVeh.id; calcRenta();
-  }
-}
-
-function resetRentaForm() {
-  setText('renta-form-title','Nueva Renta');
-  document.getElementById('renta-save-btn').innerHTML='<i class="fas fa-key"></i>Confirmar Renta';
-  ['r-veh','r-cliente','r-inicio','r-fin','r-notas'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
-  document.getElementById('calc-box').style.display='none';
-  // set today as default start
+window.resetRentaForm = function() {
+  setText("renta-form-title","Nueva Renta");
+  $("renta-save-btn").innerHTML = '<i class="fas fa-key"></i>Confirmar Renta';
+  ["r-veh","r-cliente","r-notas"].forEach(id => { const e=$(id); if(e) e.value=""; });
   const today = new Date().toISOString().slice(0,10);
-  setVal('r-inicio', today);
-  if (currentVeh) { const s=document.getElementById('r-veh'); if(s) s.value=currentVeh.id; }
+  setVal("r-inicio", today); setVal("r-fin","");
+  $("calc-box").style.display = "none";
+  if (currentVeh && currentVeh.estado==="disponible") {
+    const s = $("r-veh"); if(s) s.value = currentVeh.id;
+  }
   calcRenta();
-}
+};
 
-function calcRenta() {
-  const vId   = val('r-veh');
-  const ini   = val('r-inicio');
-  const fin   = val('r-fin');
-  const box   = document.getElementById('calc-box');
-  if (!vId||!ini||!fin) { box.style.display='none'; return; }
-  const veh = vehiculos.find(v=>v.id===vId);
-  if (!veh) { box.style.display='none'; return; }
-  const {dias} = calcRentaDays(ini, fin);
-  if (dias<=0) { box.style.display='none'; toast('w','La fecha fin debe ser posterior al inicio','<i class="fas fa-calendar-xmark"></i>'); return; }
+window.calcRenta = function() {
+  const vId = val("r-veh"), ini = val("r-inicio"), fin = val("r-fin");
+  const box = $("calc-box");
+  if (!vId||!ini||!fin) { box.style.display="none"; return; }
+  const veh = vehiculos.find(v => v.id===vId);
+  if (!veh) { box.style.display="none"; return; }
+  const { dias } = calcRentaDays(ini, fin);
+  if (dias <= 0) { box.style.display="none"; toast("w","La fecha fin debe ser posterior al inicio"); return; }
   const ppd   = toNum(veh.precioPorDia);
-  // total = dias * ppd, rounded to 2 decimals
   const total = Math.round(dias * ppd * 100) / 100;
-  box.style.display='block';
-  setText('calc-ppd',  fmtMoney(ppd));
-  setText('calc-dias', `${dias} día${dias>1?'s':''}`);
-  setText('calc-total', fmtMoney(total));
-}
+  box.style.display = "block";
+  setText("calc-ppd", fmtMoney(ppd));
+  setText("calc-dias", `${dias} día${dias>1?"s":""}`);
+  setText("calc-total", fmtMoney(total));
+};
 
-async function saveRenta() {
-  const vId   = val('r-veh');
-  const ini   = val('r-inicio');
-  const fin   = val('r-fin');
-  if (!vId||!ini||!fin) { toast('e','Completa vehículo y fechas','<i class="fas fa-exclamation-circle"></i>'); return; }
-  const veh = vehiculos.find(v=>v.id===vId);
-  if (!veh) { toast('e','Vehículo no encontrado','<i class="fas fa-circle-xmark"></i>'); return; }
-  const {dias} = calcRentaDays(ini, fin);
-  if (dias<=0) { toast('e','Fecha fin debe ser posterior al inicio','<i class="fas fa-calendar-xmark"></i>'); return; }
+window.saveRenta = async function() {
+  const vId = val("r-veh"), ini = val("r-inicio"), fin = val("r-fin");
+  if (!vId||!ini||!fin) { toast("e","Completa vehículo y fechas"); return; }
+  const veh = vehiculos.find(v => v.id===vId);
+  if (!veh) { toast("e","Vehículo no encontrado"); return; }
+  const { dias } = calcRentaDays(ini, fin);
+  if (dias <= 0) { toast("e","Fecha fin debe ser posterior al inicio"); return; }
   const ppd   = toNum(veh.precioPorDia);
   const total = Math.round(dias * ppd * 100) / 100;
 
-  const btn=document.getElementById('renta-save-btn');
-  setLoading(btn,true);
+  const btn = $("renta-save-btn"); setLoading(btn, true);
   try {
-    const rentaData = {
-      vehiculoId:  vId,
-      vehiculoNom: `${veh.marca} ${veh.modelo} ${veh.ano||''}`.trim(),
-      placa:       veh.placa||'',
-      cliente:     val('r-cliente'),
-      fechaInicio: ini,
-      fechaFin:    fin,
+    await addDoc(collection(db,"rentas"), {
+      vehiculoId:   vId,
+      vehiculoNom:  `${veh.marca} ${veh.modelo} ${veh.ano||""}`.trim(),
+      placa:        veh.placa || "",
+      cliente:      val("r-cliente"),
+      fechaInicio:  ini,
+      fechaFin:     fin,
       dias,
       precioPorDia: ppd,
       total,
-      notas:       val('r-notas'),
-      estado:      'activa',
-      createdAt:   serverTimestamp()
-    };
-    await addDoc(collection(db,'rentas'), rentaData);
-    await updateDoc(doc(db,'vehiculos',vId), {estado:'rentado'});
-    toast('s',`Renta creada · ${fmtMoney(total)}`, '<i class="fas fa-key"></i>');
-    navigate('rentas');
-  } catch(err) {
-    console.error(err); toast('e','Error al guardar renta','<i class="fas fa-circle-xmark"></i>');
-    setLoading(btn,false);
+      notas:        val("r-notas"),
+      estado:       "activa",
+      createdAt:    serverTimestamp()
+    });
+    await updateDoc(doc(db,"vehiculos",vId), { estado:"rentado" });
+    toast("s", `Renta confirmada · ${fmtMoney(total)}`);
+    navigate("rentas");
+  } catch (err) {
+    console.error(err); toast("e","Error al guardar renta");
+    setLoading(btn, false);
   }
-}
+};
 
-function setRentaFilter(f, el) {
+window.setRentaFilter = function(f, el) {
   rentaFilter = f;
-  document.querySelectorAll('#renta-chips .chip').forEach(c=>c.classList.remove('on'));
-  if(el) el.classList.add('on');
+  document.querySelectorAll("#renta-chips .chip").forEach(c => c.classList.remove("on"));
+  if(el) el.classList.add("on");
   renderRentas();
-}
+};
 
-function renderRentas() {
-  const el=document.getElementById('rentas-list'); if(!el) return;
-  const list = rentaFilter==='todas' ? rentas : rentas.filter(r=>r.estado===rentaFilter);
-  el.innerHTML = list.length
-    ? list.map(r=>rentaCardHTML(r)).join('')
-    : emptyHTML('fa-key','Sin rentas','Crea tu primera renta');
-}
+window.renderRentas = function() {
+  const el = $("rentas-list"); if (!el) return;
+  const list = rentaFilter==="todas" ? rentas : rentas.filter(r => r.estado===rentaFilter);
+  el.innerHTML = list.length ? list.map(r => rentaCardHTML(r)).join("") : emptyHTML("fa-key","Sin rentas","Crea tu primera renta");
+};
 
 function rentaCardHTML(r) {
-  const stl = {activa:'🔴 Activa', completada:'🟢 Completada', cancelada:'⚫ Cancelada'};
-  const comp = r.estado==='activa' ? `<button onclick="selectRentaToComplete('${r.id}')" style="padding:6px 12px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:var(--green);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">Finalizar</button>` : '';
-  const dias = r.dias || (r.fechaInicio && r.fechaFin ? calcRentaDays(r.fechaInicio,r.fechaFin).dias : '—');
+  const stLabels = { activa:"Activa", completada:"Completada", cancelada:"Cancelada" };
+  const dias = r.dias || (r.fechaInicio && r.fechaFin ? calcRentaDays(r.fechaInicio,r.fechaFin).dias : 0);
+  const actions = r.estado === "activa" ? `
+    <button onclick="event.stopPropagation();selectRentaToComplete('${r.id}')" style="padding:5px 10px;background:var(--green-bg);border:1px solid rgba(34,197,94,.3);color:var(--green);border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">Finalizar</button>
+    <button onclick="event.stopPropagation();selectRentaToCancel('${r.id}')" style="padding:5px 10px;background:var(--red-bg);border:1px solid rgba(239,68,68,.3);color:var(--red);border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-left:5px">Cancelar</button>` : "";
   return `<div class="renta-card ${r.estado}">
     <div class="renta-top">
       <div class="renta-veh">${r.vehiculoNom||r.vehiculoId}</div>
-      <span class="sbadge ${r.estado==='activa'?'rentado':r.estado==='completada'?'disponible':'mantenimiento'}">${stl[r.estado]||r.estado}</span>
+      <span class="sbadge ${r.estado==="activa"?"rentado":r.estado==="completada"?"completada":"cancelada'}"}><span class="sdot"></span>${stLabels[r.estado]||r.estado}</span>
     </div>
-    ${r.placa?`<div class="renta-meta"><i class="fas fa-hashtag" style="font-size:10px;margin-right:4px;opacity:.5"></i>${r.placa}</div>`:''}
-    ${r.cliente?`<div class="renta-meta"><i class="fas fa-user" style="font-size:10px;margin-right:4px;opacity:.5"></i>${r.cliente}</div>`:''}
-    <div class="renta-meta"><i class="fas fa-calendar" style="font-size:10px;margin-right:4px;opacity:.5"></i>${r.fechaInicio||'—'} → ${r.fechaFin||'—'}</div>
+    ${r.placa?`<div class="renta-meta"><i class="fas fa-hashtag" style="font-size:9px;opacity:.5"></i>${r.placa}</div>`:""}
+    ${r.cliente?`<div class="renta-meta"><i class="fas fa-user" style="font-size:9px;opacity:.5"></i>${r.cliente}</div>`:""}
+    <div class="renta-meta"><i class="fas fa-calendar" style="font-size:9px;opacity:.5"></i>${r.fechaInicio||"—"} → ${r.fechaFin||"—"}</div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
-      <div><div class="renta-total">${fmtMoney(r.total)}</div><div class="renta-days">${dias} día${dias>1?'s':''} · $${toNum(r.precioPorDia).toFixed(2)}/día</div></div>
-      ${comp}
+      <div><div class="renta-total">${fmtMoney(r.total)}</div><div class="renta-days">${dias} día${dias!==1?"s":""} · ${fmtMoney(r.precioPorDia)}/día</div></div>
+      <div>${actions}</div>
     </div>
   </div>`;
 }
 
-let selectedRentaId = null;
 window.selectRentaToComplete = function(id) {
   selectedRentaId = id;
-  document.getElementById('complete-renta-modal').style.display='block';
+  $("complete-renta-modal").style.display = "block";
+};
+window.selectRentaToCancel = function(id) {
+  selectedRentaId = id;
+  $("cancel-renta-modal").style.display = "block";
 };
 
-async function completeRenta() {
-  closeModal('complete-renta-modal');
+window.completeRenta = async function() {
+  closeModal("complete-renta-modal");
   if (!selectedRentaId) return;
-  const r = rentas.find(x=>x.id===selectedRentaId);
-  if (!r) return;
+  const r = rentas.find(x => x.id===selectedRentaId);
   try {
-    await updateDoc(doc(db,'rentas',selectedRentaId), {estado:'completada'});
-    if (r.vehiculoId) await updateDoc(doc(db,'vehiculos',r.vehiculoId), {estado:'disponible'});
-    toast('s','Renta completada · Vehículo disponible','<i class="fas fa-circle-check"></i>');
-    selectedRentaId=null;
-  } catch { toast('e','Error al completar renta','<i class="fas fa-circle-xmark"></i>'); }
-}
+    await updateDoc(doc(db,"rentas",selectedRentaId), { estado:"completada" });
+    if (r?.vehiculoId) await updateDoc(doc(db,"vehiculos",r.vehiculoId), { estado:"disponible" });
+    toast("s","Renta completada · Vehículo disponible");
+    selectedRentaId = null;
+  } catch { toast("e","Error al completar renta"); }
+};
+
+window.cancelRenta = async function() {
+  closeModal("cancel-renta-modal");
+  if (!selectedRentaId) return;
+  const r = rentas.find(x => x.id===selectedRentaId);
+  try {
+    await updateDoc(doc(db,"rentas",selectedRentaId), { estado:"cancelada" });
+    if (r?.vehiculoId) await updateDoc(doc(db,"vehiculos",r.vehiculoId), { estado:"disponible" });
+    toast("i","Renta cancelada");
+    selectedRentaId = null;
+  } catch { toast("e","Error al cancelar renta"); }
+};
 
 function renderDetalleRentas() {
-  const el=document.getElementById('d-rentas-list'); if(!el||!currentVeh) return;
-  const list = rentas.filter(r=>r.vehiculoId===currentVeh.id).slice(0,5);
-  el.innerHTML = list.length
-    ? list.map(r=>`<div class="renta-card ${r.estado}" style="margin-bottom:8px">
-        <div style="display:flex;justify-content:space-between"><span style="font-size:13px;font-weight:700">${r.fechaInicio||'—'} → ${r.fechaFin||'—'}</span><span class="sbadge ${r.estado==='activa'?'rentado':r.estado==='completada'?'disponible':'mantenimiento'}">${r.estado}</span></div>
-        <div style="font-size:15px;font-weight:800;color:var(--p);margin-top:5px">${fmtMoney(r.total)}</div>
-      </div>`).join('')
-    : `<div style="font-size:13px;color:var(--t3);padding:10px 0">Sin rentas registradas</div>`;
+  const el = $("d-rentas-list"); if (!el || !currentVeh) return;
+  const list = rentas.filter(r => r.vehiculoId===currentVeh.id).slice(0, 5);
+  el.innerHTML = list.length ? list.map(r => `
+    <div class="renta-card ${r.estado}" style="margin-bottom:7px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:12px;font-weight:700;color:var(--t1)">${r.fechaInicio||"—"} → ${r.fechaFin||"—"}</span>
+        <span class="sbadge ${r.estado==="activa"?"rentado":"completada"}">${r.estado}</span>
+      </div>
+      ${r.cliente?`<div style="font-size:11px;color:var(--t3);margin-top:3px">${r.cliente}</div>`:""}
+      <div style="font-size:15px;font-weight:900;color:var(--p);margin-top:5px">${fmtMoney(r.total)}</div>
+    </div>`).join("") : `<p style="font-size:13px;color:var(--t3);padding:8px 0">Sin rentas registradas</p>`;
 }
 
-/* ══════════════════ EXPENSES ══════════════════ */
+/* ══════════════════════════════════════
+  EXPENSES
+══════════════════════════════════════ */
 function renderTiposCustom() {
-  const el=document.getElementById('g-tipos-custom'); if(!el) return;
-  const all = ['Aceite motor','Aceite transmisión','Corona','Mantenimiento general','Lavado','Multa','Seguro','Combustible'];
-  const extra = tiposGastoExtra.map(t=>t.nombre);
-  const selEl = document.getElementById('g-tipo');
-  const existOpts = all.concat(extra);
-  // rebuild select
-  selEl.innerHTML = '<option value="">Seleccionar</option>' +
-    existOpts.map(t=>`<option>${t}</option>`).join('') +
-    '<option value="__nuevo">+ Agregar nuevo tipo...</option>';
+  const selEl = $("g-tipo"); if (!selEl) return;
+  const base = ["Aceite motor","Aceite transmisión","Corona","Mantenimiento general","Lavado","Multa","Seguro","Combustible","Llantas","Frenos","Batería"];
+  const extra = tiposGastoExtra.map(t => t.nombre);
+  const opts = [...new Set([...base, ...extra])];
+  selEl.innerHTML = `<option value="">Seleccionar</option>` +
+    opts.map(t => `<option>${t}</option>`).join("") +
+    `<option value="__nuevo">+ Agregar nuevo tipo...</option>`;
 }
 
-function checkGastoOtro() {
-  const v = val('g-tipo');
-  document.getElementById('g-tipo-nuevo-wrap').style.display = v==='__nuevo' ? 'block' : 'none';
-}
+window.checkGastoOtro = function() {
+  $("g-tipo-nuevo-wrap").style.display = $("g-tipo").value === "__nuevo" ? "block" : "none";
+};
 
-async function addGastoType() {
-  const nm = val('g-tipo-nuevo').trim();
-  if (!nm) { toast('e','Escribe el nombre del tipo','<i class="fas fa-exclamation-circle"></i>'); return; }
+window.addGastoType = async function() {
+  const nm = val("g-tipo-nuevo");
+  if (!nm) { toast("e","Escribe el nombre del tipo"); return; }
   try {
-    await addDoc(collection(db,'tiposGasto'), {nombre:nm, createdAt:serverTimestamp()});
-    document.getElementById('g-tipo').value = nm;
-    document.getElementById('g-tipo-nuevo-wrap').style.display='none';
-    setVal('g-tipo-nuevo','');
-    toast('s',`Tipo "${nm}" creado`,'<i class="fas fa-circle-check"></i>');
-  } catch { toast('e','Error al crear tipo','<i class="fas fa-circle-xmark"></i>'); }
-}
+    await addDoc(collection(db,"tiposGasto"), { nombre:nm, createdAt:serverTimestamp() });
+    $("g-tipo").value = nm; $("g-tipo-nuevo-wrap").style.display="none"; setVal("g-tipo-nuevo","");
+    toast("s",`Tipo "${nm}" creado`);
+  } catch { toast("e","Error al crear tipo"); }
+};
 
-function openNewGasto() {
-  navigate('nuevo-gasto');
-  if (currentVeh) { const s=document.getElementById('g-veh'); if(s) s.value=currentVeh.id; }
-}
+window.resetGastoForm = function() {
+  ["g-veh","g-tipo","g-monto","g-desc"].forEach(id => { const e=$(id); if(e) e.value=""; });
+  setVal("g-fecha", new Date().toISOString().slice(0,10));
+  $("g-tipo-nuevo-wrap").style.display = "none";
+  populateVehSelects();
+  if (currentVeh) { const s=$("g-veh"); if(s) s.value=currentVeh.id; }
+};
 
-function resetGastoForm() {
-  ['g-veh','g-tipo','g-monto','g-desc'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
-  setVal('g-fecha', new Date().toISOString().slice(0,10));
-  document.getElementById('g-tipo-nuevo-wrap').style.display='none';
-  if(currentVeh){const s=document.getElementById('g-veh');if(s)s.value=currentVeh.id;}
-}
-
-async function saveGasto() {
-  let tipo = val('g-tipo');
-  if (tipo==='__nuevo') tipo = val('g-tipo-nuevo').trim();
-  const monto = toNum(val('g-monto'));
-  const fecha = val('g-fecha');
-  if (!tipo) { toast('e','Selecciona el tipo de gasto','<i class="fas fa-exclamation-circle"></i>'); return; }
-  if (monto<=0) { toast('e','Ingresa un monto válido','<i class="fas fa-exclamation-circle"></i>'); return; }
-  if (!fecha) { toast('e','Selecciona la fecha','<i class="fas fa-exclamation-circle"></i>'); return; }
-
-  const vId=val('g-veh');
-  const veh=vehiculos.find(v=>v.id===vId);
-  const btn=document.getElementById('gasto-save-btn');
-  setLoading(btn,true);
+window.saveGasto = async function() {
+  let tipo = val("g-tipo");
+  if (tipo==="__nuevo") tipo = val("g-tipo-nuevo");
+  const monto = toNum(val("g-monto")), fecha = val("g-fecha");
+  if (!tipo) { toast("e","Selecciona el tipo de gasto"); return; }
+  if (monto <= 0) { toast("e","Ingresa un monto válido"); return; }
+  if (!fecha) { toast("e","Selecciona la fecha"); return; }
+  const vId = val("g-veh");
+  const veh = vehiculos.find(v => v.id===vId);
+  const btn = $("gasto-save-btn"); setLoading(btn, true);
   try {
-    await addDoc(collection(db,'gastos'),{
-      vehiculoId:  vId||null,
-      vehiculoNom: veh ? `${veh.marca} ${veh.modelo}` : 'General',
-      tipo, costo: Math.round(monto*100)/100,
-      fecha, descripcion: val('g-desc'),
+    await addDoc(collection(db,"gastos"), {
+      vehiculoId:  vId || null,
+      vehiculoNom: veh ? `${veh.marca} ${veh.modelo}` : "General",
+      tipo, costo: Math.round(monto * 100) / 100,
+      fecha, descripcion: val("g-desc"),
       createdAt: serverTimestamp()
     });
-    toast('s',`Gasto registrado · ${fmtMoney(monto)}`,'<i class="fas fa-receipt"></i>');
-    navigate('gastos');
-  } catch { toast('e','Error al guardar gasto','<i class="fas fa-circle-xmark"></i>'); setLoading(btn,false); }
-}
+    toast("s","Gasto registrado correctamente");
+    navigate("gastos");
+  } catch (err) {
+    console.error(err); toast("e","Error al guardar gasto");
+    setLoading(btn, false);
+  }
+};
 
-function renderGastos() {
-  const el=document.getElementById('gastos-list'); if(!el) return;
-  const q=val('gasto-search').toLowerCase();
-  const list=gastos.filter(g=>!q||(g.tipo+g.vehiculoNom+g.descripcion).toLowerCase().includes(q));
-  el.innerHTML=list.length
-    ? list.map(g=>`<div class="gasto-card">
-        <div class="gasto-ico"><i class="fas fa-receipt"></i></div>
-        <div class="gasto-info">
-          <div class="gasto-tipo">${g.tipo}</div>
-          ${g.vehiculoNom?`<div class="gasto-desc">${g.vehiculoNom}</div>`:''}
-          ${g.descripcion?`<div class="gasto-desc" style="font-style:italic">${g.descripcion}</div>`:''}
-          <div class="gasto-fecha">${g.fecha||''}</div>
-        </div>
-        <div class="gasto-monto">-${fmtMoney(g.costo)}</div>
-      </div>`).join('')
-    : emptyHTML('fa-receipt','Sin gastos','Registra el primer gasto');
+window.renderGastos = function() {
+  const el = $("gastos-list"); if (!el) return;
+  el.innerHTML = gastos.length ? gastos.map(g => gastoCardHTML(g)).join("") : emptyHTML("fa-receipt","Sin gastos","Registra tu primer gasto");
+  // Summary
+  const sm = $("gastos-summary");
+  if (sm) {
+    const now = new Date();
+    const { gas: gasMes } = calcFinances({ year:now.getFullYear(), month:now.getMonth() });
+    const gasTotal = Math.round(gastos.reduce((s,g) => s + toNum(g.costo), 0) * 100) / 100;
+    sm.innerHTML = `
+      <div class="fin-card gas"><div class="fin-val">${fmtMoney(gasMes)}</div><div class="fin-label">Este mes</div></div>
+      <div class="fin-card" style=""><div class="fin-val" style="color:var(--blue)">${fmtMoney(gasTotal)}</div><div class="fin-label">Total</div></div>
+      <div class="fin-card" style=""><div class="fin-val" style="color:var(--t1)">${gastos.length}</div><div class="fin-label">Registros</div></div>`;
+  }
+};
+
+function gastoCardHTML(g) {
+  const veh = vehiculos.find(v => v.id===g.vehiculoId);
+  const vName = veh ? `${veh.marca} ${veh.modelo}` : (g.vehiculoNom || "General");
+  return `<div class="gasto-card">
+    <div class="gasto-ico"><i class="fas fa-wrench"></i></div>
+    <div class="gasto-info">
+      <div class="gasto-tipo">${g.tipo}</div>
+      ${g.descripcion ? `<div class="gasto-desc">${g.descripcion}</div>` : ""}
+      <div class="gasto-fecha"><i class="fas fa-car" style="font-size:9px;margin-right:3px"></i>${vName} · ${g.fecha||"—"}</div>
+    </div>
+    <div class="gasto-monto">${fmtMoney(g.costo)}</div>
+  </div>`;
 }
 
 function renderDetalleGastos() {
-  const el=document.getElementById('d-gastos-list'); if(!el||!currentVeh) return;
-  const list=gastos.filter(g=>g.vehiculoId===currentVeh.id).slice(0,5);
-  el.innerHTML=list.length
-    ? list.map(g=>`<div class="gasto-card" style="margin-bottom:8px">
-        <div class="gasto-ico"><i class="fas fa-receipt"></i></div>
-        <div class="gasto-info"><div class="gasto-tipo">${g.tipo}</div><div class="gasto-fecha">${g.fecha||''}</div></div>
-        <div class="gasto-monto">-${fmtMoney(g.costo)}</div>
-      </div>`).join('')
-    : `<div style="font-size:13px;color:var(--t3);padding:10px 0">Sin gastos registrados</div>`;
+  const el = $("d-gastos-list"); if (!el || !currentVeh) return;
+  const list = gastos.filter(g => g.vehiculoId===currentVeh.id).slice(0, 5);
+  el.innerHTML = list.length ? list.map(g => `
+    <div class="gasto-card" style="margin-bottom:7px">
+      <div class="gasto-ico"><i class="fas fa-wrench"></i></div>
+      <div class="gasto-info">
+        <div class="gasto-tipo">${g.tipo}</div>
+        ${g.descripcion ? `<div class="gasto-desc">${g.descripcion}</div>` : ""}
+        <div class="gasto-fecha">${g.fecha||"—"}</div>
+      </div>
+      <div class="gasto-monto">${fmtMoney(g.costo)}</div>
+    </div>`).join("") : `<p style="font-size:13px;color:var(--t3);padding:8px 0">Sin gastos registrados</p>`;
 }
 
-/* ══════════════════ FINANCES SCREEN ══════════════════ */
+/* ══════════════════════════════════════
+  FINANCES
+══════════════════════════════════════ */
 function buildMonthTabs() {
-  const el=document.getElementById('month-tabs'); if(!el) return;
-  const months=getAvailableMonths();
-  el.innerHTML=`<span class="mtab${finPeriod===null?' on':''}" onclick="selectPeriod(null,this)">Todo</span>` +
-    months.map(p=>`<span class="mtab${finPeriod&&finPeriod.year===p.year&&finPeriod.month===p.month?' on':''}" onclick="selectPeriod({year:${p.year},month:${p.month}},this)">${p.label}</span>`).join('');
+  const tabs = $("month-tabs"); if (!tabs) return;
+  const months = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+  const now = new Date();
+  const periods = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
+    periods.push({ year:d.getFullYear(), month:d.getMonth(), label:`${months[d.getMonth()]} ${d.getFullYear()}` });
+  }
+  if (!selMonth) selMonth = periods[periods.length-1];
+  tabs.innerHTML = periods.map((p,i) => {
+    const on = selMonth && p.year===selMonth.year && p.month===selMonth.month;
+    return `<span class="mtab${on?" on":""}" onclick="selectMonth(${i})" data-idx="${i}">${p.label}</span>`;
+  }).join("");
+  tabs._periods = periods;
 }
 
-function getAvailableMonths() {
-  const set=new Set();
-  [...rentas,...gastos].forEach(r=>{
-    const d=parseDate(r.fechaFin||r.fechaInicio||r.fecha);
-    if(d) set.add(`${d.getFullYear()}-${d.getMonth()}`);
-  });
-  // always include current month
-  const now=new Date(); set.add(`${now.getFullYear()}-${now.getMonth()}`);
-  return [...set].sort((a,b)=>b.localeCompare(a)).map(s=>{
-    const [y,m]=s.split('-').map(Number);
-    return {year:y,month:m,label:new Date(y,m,1).toLocaleDateString('es',{month:'short',year:'numeric'})};
-  }).slice(0,12);
-}
-
-window.selectPeriod = function(period, el) {
-  finPeriod = period;
-  document.querySelectorAll('#month-tabs .mtab').forEach(t=>t.classList.remove('on'));
-  if(el) el.classList.add('on');
+window.selectMonth = function(i) {
+  const tabs = $("month-tabs"); if (!tabs) return;
+  selMonth = tabs._periods[i];
+  tabs.querySelectorAll(".mtab").forEach((t,j) => t.classList.toggle("on", j===i));
   renderFinances();
 };
 
 function renderFinances() {
-  const {ing,gas,bal} = calcFinances(finPeriod);
-  setText('f-ing', fmtMoney(ing));
-  setText('f-gas', fmtMoney(gas));
-  setText('f-bal', fmtMoney(Math.abs(bal)));
-  const bc=document.getElementById('f-bal-card');
-  if(bc) bc.className = bal>=0?'fin-card bal':'fin-card bal loss';
+  chartsReady = false;
+  const { ing, gas, bal, rentasFilt, gastosFilt } = calcFinances(selMonth);
 
-  // Balance banner
-  const bn=document.getElementById('f-balance-banner');
-  const bt=document.getElementById('f-balance-title');
-  const bs=document.getElementById('f-balance-sub');
-  if(ing===0&&gas===0){
-    bn.className='alert-banner'; setText('f-balance-title','Sin datos en este período');
-    setText('f-balance-sub','Registra rentas y gastos para ver el balance');
-  } else if(bal>=0){
-    bn.className='alert-banner green'; setText('f-balance-title',`🟢 Ganancia: ${fmtMoney(bal)}`);
-    setText('f-balance-sub',`Ingresos ${fmtMoney(ing)} - Gastos ${fmtMoney(gas)}`);
-  } else {
-    bn.className='alert-banner red'; setText('f-balance-title',`🔴 Pérdida: ${fmtMoney(Math.abs(bal))}`);
-    setText('f-balance-sub',`Los gastos superan los ingresos en ${fmtMoney(Math.abs(bal))}`);
+  // Cards
+  const fc = $("fin-cards-detail");
+  if (fc) {
+    fc.innerHTML = `
+      <div class="fin-card ing"><div class="fin-val">${fmtMoney(ing)}</div><div class="fin-label">Ingresos</div></div>
+      <div class="fin-card gas"><div class="fin-val">${fmtMoney(gas)}</div><div class="fin-label">Gastos</div></div>
+      <div class="fin-card bal ${bal<0?"loss":""}"><div class="fin-val">${fmtMoney(Math.abs(bal))}</div><div class="fin-label">Balance</div></div>`;
   }
 
-  // Period subtitle
-  const pSub=document.getElementById('f-period-sub');
-  if(pSub) pSub.textContent = finPeriod ? new Date(finPeriod.year,finPeriod.month,1).toLocaleDateString('es',{month:'long',year:'numeric'}) : 'Histórico completo';
+  // Period label
+  if (selMonth) {
+    const ms=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+    setText("chart-period-label", `${ms[selMonth.month]} ${selMonth.year}`);
+    setText("fin-detail-sub", `Detalle ${ms[selMonth.month]} ${selMonth.year}`);
+  }
+
+  // Incomes vs expenses chart
+  renderChartIG(ing, gas);
+
+  // By vehicle chart
+  renderChartVeh(rentasFilt);
 
   // Detail rows
-  renderFinanceDetail(ing,gas,bal);
-  // Top vehicles
-  renderTopVeh();
-  // Charts
-  renderCharts();
-  chartsReady=true;
-}
-
-function renderFinanceDetail(ing,gas,bal) {
-  const el=document.getElementById('f-detail-rows'); if(!el) return;
-  const rr = rentas.filter(r=>{
-    if(r.estado!=='completada') return false;
-    if(!finPeriod) return true;
-    const d=parseDate(r.fechaFin||r.fechaInicio);
-    return d&&d.getFullYear()===finPeriod.year&&d.getMonth()===finPeriod.month;
-  });
-  el.innerHTML=`
-    <div class="fin-row"><span class="fin-row-label">Rentas completadas</span><span class="fin-row-val">${rr.length}</span></div>
-    <div class="fin-row"><span class="fin-row-label">Días rentados</span><span class="fin-row-val">${rr.reduce((s,r)=>s+(r.dias||0),0)}</span></div>
-    <div class="fin-row"><span class="fin-row-label">Ingresos totales</span><span class="fin-row-val" style="color:var(--green)">${fmtMoney(ing)}</span></div>
-    <div class="fin-row"><span class="fin-row-label">Gastos totales</span><span class="fin-row-val" style="color:var(--red)">${fmtMoney(gas)}</span></div>
-    <div class="fin-row"><span class="fin-row-label">Balance</span><span class="fin-row-val" style="color:${bal>=0?'var(--blue)':'var(--red)'};font-size:16px">${bal>=0?'+':''}${fmtMoney(bal)}</span></div>`;
-}
-
-function renderTopVeh() {
-  const el=document.getElementById('f-top-veh'); if(!el) return;
-  const map={};
-  rentas.filter(r=>r.estado==='completada').forEach(r=>{
-    if(!r.vehiculoId) return;
-    if(!map[r.vehiculoId]) map[r.vehiculoId]={nom:r.vehiculoNom||r.vehiculoId, count:0, ingreso:0};
-    map[r.vehiculoId].count++;
-    map[r.vehiculoId].ingreso=Math.round((map[r.vehiculoId].ingreso+toNum(r.total))*100)/100;
-  });
-  const list=Object.values(map).sort((a,b)=>b.count-a.count).slice(0,6);
-  const maxC=list.length?list[0].count:1;
-  el.innerHTML=list.length
-    ? list.map(v=>`<div class="bar-row">
-        <div class="bar-label" title="${v.nom}">${v.nom}</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${Math.round(v.count/maxC*100)}%"></div></div>
-        <div class="bar-count">${v.count}</div>
-        <div style="font-size:10px;color:var(--green);font-weight:700;width:60px;text-align:right">${fmtMoney(v.ingreso)}</div>
-      </div>`).join('')
-    : `<div style="font-size:13px;color:var(--t3);padding:12px 0">Sin rentas completadas aún</div>`;
-}
-
-function renderCharts() {
-  renderIngChart(); renderGasChart();
-}
-
-function refreshCharts() { if(chartsReady) renderCharts(); }
-
-function renderIngChart() {
-  const ctx=document.getElementById('ing-chart'); if(!ctx) return;
-  // Build last 6 months of income data
-  const months=[];
-  for(let i=5;i>=0;i--){
-    const d=new Date(); d.setDate(1); d.setMonth(d.getMonth()-i);
-    const {ing}=calcFinances({year:d.getFullYear(),month:d.getMonth()});
-    months.push({label:d.toLocaleDateString('es',{month:'short'}),ing});
+  const dr = $("fin-detail-rows");
+  if (dr) {
+    const rows = [
+      ["Total ingresos (rentas completadas)", fmtMoney(ing), "var(--green)"],
+      ["Total gastos", fmtMoney(gas), "var(--red)"],
+      ["Balance", fmtMoney(Math.abs(bal)), bal>=0?"var(--blue)":"var(--red)"],
+      ["Rentas completadas", String(rentasFilt.length), "var(--t1)"],
+      ["Rentas activas", String(rentas.filter(r=>r.estado==="activa").length), "var(--t1)"],
+      ["Gastos registrados", String(gastosFilt.length), "var(--t1)"],
+    ];
+    dr.innerHTML = rows.map(([l,v,c]) => `<div class="fin-row"><span class="fin-row-label">${l}</span><span class="fin-row-val" style="color:${c}">${v}</span></div>`).join("");
   }
-  if(ingChart) ingChart.destroy();
-  ingChart=new Chart(ctx,{
-    type:'bar',
+
+  chartsReady = true;
+}
+
+function renderChartIG(ing, gas) {
+  const canvas = $("chart-ig"); if (!canvas) return;
+  if (chartIG) { chartIG.destroy(); chartIG = null; }
+  chartIG = new Chart(canvas.getContext("2d"), {
+    type:"bar",
     data:{
-      labels:months.map(m=>m.label),
+      labels:["Ingresos","Gastos"],
       datasets:[{
-        label:'Ingresos', data:months.map(m=>m.ing),
-        backgroundColor:'rgba(139,92,246,.6)',borderColor:'#8b5cf6',borderWidth:2,
-        borderRadius:8,borderSkipped:false
-      },{
-        label:'Gastos',
-        data:months.map(m=>{
-          const d=new Date(); d.setDate(1); d.setMonth(d.getMonth()-(5-months.indexOf(m)));
-          return calcFinances({year:d.getFullYear(),month:d.getMonth()}).gas;
-        }),
-        backgroundColor:'rgba(239,68,68,.45)',borderColor:'#ef4444',borderWidth:2,
-        borderRadius:8,borderSkipped:false
+        data:[ing, gas],
+        backgroundColor:["rgba(34,197,94,.8)","rgba(239,68,68,.8)"],
+        borderColor:["#22C55E","#EF4444"],
+        borderWidth:1.5, borderRadius:8, borderSkipped:false
       }]
     },
     options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{labels:{color:'#8888aa',font:{size:11,family:'Inter'},boxWidth:12}}},
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label: ctx => fmtMoney(ctx.raw)}} },
       scales:{
-        x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#555577',font:{size:10}}},
-        y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#555577',font:{size:10},callback:v=>'$'+v},beginAtZero:true}
+        y:{ ticks:{callback:v=>fmtMoney(v),color:"#6B7280",font:{size:10}}, grid:{color:"rgba(0,0,0,.05)"} },
+        x:{ ticks:{color:"#111827",font:{weight:"600",size:12}}, grid:{display:false} }
       }
     }
   });
 }
 
-function renderGasChart() {
-  const ctx=document.getElementById('gas-chart'); if(!ctx) return;
-  // Group gastos by tipo
-  const map={};
-  gastos.filter(g=>{
-    if(!finPeriod) return true;
-    const d=parseDate(g.fecha); return d&&d.getFullYear()===finPeriod.year&&d.getMonth()===finPeriod.month;
-  }).forEach(g=>{map[g.tipo]=(map[g.tipo]||0)+toNum(g.costo);});
-  const labels=Object.keys(map); const data=Object.values(map);
-  if(gasChart) gasChart.destroy();
-  if(!labels.length){
-    if(gasChart) gasChart.destroy(); return;
-  }
-  const colors=['rgba(239,68,68,.7)','rgba(245,158,11,.7)','rgba(59,130,246,.7)','rgba(16,185,129,.7)','rgba(139,92,246,.7)','rgba(6,182,212,.7)','rgba(249,115,22,.7)'];
-  gasChart=new Chart(ctx,{
-    type:'doughnut',
+function renderChartVeh(rentasFilt) {
+  const canvas = $("chart-veh"); if (!canvas) return;
+  if (chartVeh) { chartVeh.destroy(); chartVeh = null; }
+  const byVeh = {};
+  rentasFilt.forEach(r => {
+    const k = r.vehiculoNom || r.vehiculoId;
+    byVeh[k] = Math.round(((byVeh[k]||0) + toNum(r.total)) * 100) / 100;
+  });
+  const sorted = Object.entries(byVeh).sort((a,b) => b[1]-a[1]).slice(0, 6);
+  if (!sorted.length) { canvas.parentElement.innerHTML = `<p style="text-align:center;color:var(--t3);padding:30px;font-size:13px">Sin datos para este período</p>`; return; }
+  const colors = ["#2563EB","#22C55E","#F59E0B","#EF4444","#8B5CF6","#06B6D4"];
+  chartVeh = new Chart(canvas.getContext("2d"), {
+    type:"doughnut",
     data:{
-      labels,
-      datasets:[{data,backgroundColor:colors.slice(0,labels.length),borderColor:'rgba(255,255,255,.08)',borderWidth:2,hoverOffset:6}]
+      labels: sorted.map(([k]) => k.length > 18 ? k.slice(0,16)+"…" : k),
+      datasets:[{ data: sorted.map(([,v])=>v), backgroundColor:colors, borderWidth:2, borderColor:"#fff" }]
     },
     options:{
-      responsive:true,maintainAspectRatio:false,cutout:'65%',
-      plugins:{legend:{position:'right',labels:{color:'#8888aa',font:{size:10,family:'Inter'},boxWidth:10,padding:10}},
-        tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${fmtMoney(ctx.raw)} (${Math.round(ctx.raw/data.reduce((a,b)=>a+b,0)*100)}%)`}}}
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ position:"bottom", labels:{color:"#6B7280",font:{size:10},boxWidth:10,padding:8} },
+        tooltip:{callbacks:{label: ctx => `${ctx.label}: ${fmtMoney(ctx.raw)}`}}
+      }
     }
   });
 }
 
-/* ══════════════════ ALERTS ══════════════════ */
+function refreshCharts() {
+  if ($("screen-finanzas").classList.contains("active")) renderFinances();
+}
+
+/* ══════════════════════════════════════
+  ALERTS
+══════════════════════════════════════ */
 function buildAlerts() {
-  const rented = vehiculos.filter(v=>v.estado==='rentado');
-  const maint  = vehiculos.filter(v=>v.estado==='mantenimiento');
-  // maintenance alert: vehicles with lastMaintenance > 90 days ago or unknown
-  const needMaint = vehiculos.filter(v=>{
-    if(!v.ultimoMantenimiento) return false;
-    const d=parseDate(v.ultimoMantenimiento);
-    return d && (new Date()-d)/(1000*60*60*24)>90;
-  });
-  let count=0, html='';
-  if(rented.length){count+=rented.length;html+=rented.map(v=>`<div class="alert-banner red" onclick="openVeh('${v.id}')">
-    <i class="fas fa-car"></i><div><div class="al-title">🔴 ${v.marca} ${v.modelo} — Fuera (Rentado)</div><div class="al-sub">${v.placa||'Sin placa'}</div></div></div>`).join('');}
-  if(maint.length){count+=maint.length;html+=maint.map(v=>`<div class="alert-banner" onclick="openVeh('${v.id}')">
-    <i class="fas fa-wrench"></i><div><div class="al-title">🟡 ${v.marca} ${v.modelo} — En Mantenimiento</div><div class="al-sub">${v.placa||'Sin placa'}</div></div></div>`).join('');}
-  if(needMaint.length){count+=needMaint.length;html+=needMaint.map(v=>`<div class="alert-banner" onclick="openVeh('${v.id}')">
-    <i class="fas fa-triangle-exclamation"></i><div><div class="al-title">⚠️ ${v.marca} ${v.modelo} — Necesita mantenimiento</div><div class="al-sub">Último mantenimiento hace más de 90 días</div></div></div>`).join('');}
-
-  // home alerts (first 3)
-  const homeEl=document.getElementById('home-alerts');
-  if(homeEl) homeEl.innerHTML=html?html.split('</div></div>').slice(0,3).join('</div></div>')+'</div></div>':'';
-
-  const ab=document.getElementById('alert-btn');
-  const ac=document.getElementById('alert-count');
-  if(ab&&ac){
-    if(count>0){ac.style.display='flex';ac.textContent=count>9?'9+':count;}
-    else{ac.style.display='none';}
+  const mant = vehiculos.filter(v => v.estado==="mantenimiento");
+  const count = mant.length;
+  const bd = $("alert-count");
+  if (bd) { bd.textContent = count; bd.style.display = count>0 ? "flex" : "none"; }
+  const hAlerts = $("home-alerts");
+  if (hAlerts) {
+    hAlerts.innerHTML = mant.map(v => `
+      <div class="alert-banner" onclick="openVeh('${v.id}')">
+        <i class="fas fa-triangle-exclamation"></i>
+        <div><div class="al-title">${v.marca} ${v.modelo} en mantenimiento</div><div class="al-sub">Placa: ${v.placa||"—"} · ${fmtMoney(v.precioPorDia||0)}/día</div></div>
+      </div>`).join("");
   }
 }
 
-function renderAlertas() {
-  const el=document.getElementById('alertas-list'); if(!el) return;
-  const rented = vehiculos.filter(v=>v.estado==='rentado');
-  const maint  = vehiculos.filter(v=>v.estado==='mantenimiento');
-  const needMaint = vehiculos.filter(v=>{
-    if(!v.ultimoMantenimiento) return false;
-    const d=parseDate(v.ultimoMantenimiento);
-    return d&&(new Date()-d)/(1000*60*60*24)>90;
+window.renderAlertas = function() {
+  const el = $("alertas-list"); if (!el) return;
+  const mant = vehiculos.filter(v => v.estado==="mantenimiento");
+  const actRentas = rentas.filter(r => r.estado==="activa");
+  let html = "";
+  mant.forEach(v => {
+    html += `<div class="alert-banner" onclick="openVeh('${v.id}')"><i class="fas fa-wrench"></i><div><div class="al-title">${v.marca} ${v.modelo} en mantenimiento</div><div class="al-sub">Ingresó a mantenimiento · ${fmtMoney(v.precioPorDia||0)}/día</div></div></div>`;
   });
-  let html='';
-  if(!rented.length&&!maint.length&&!needMaint.length){
-    html=emptyHTML('fa-bell-slash','Sin alertas','Todos los vehículos están en orden'); el.innerHTML=html; return;
-  }
-  if(rented.length){html+=`<div class="sec-hdr"><span class="sec-title">🔴 Vehículos Rentados (${rented.length})</span></div>`+rented.map(v=>`<div class="alert-banner red" onclick="openVeh('${v.id}')"><i class="fas fa-car"></i><div><div class="al-title">${v.marca} ${v.modelo} ${v.ano||''}</div><div class="al-sub">${v.placa||'Sin placa'} · Fuera</div></div></div>`).join('');}
-  if(maint.length){html+=`<div class="sec-hdr"><span class="sec-title">🟡 En Mantenimiento (${maint.length})</span></div>`+maint.map(v=>`<div class="alert-banner" onclick="openVeh('${v.id}')"><i class="fas fa-wrench"></i><div><div class="al-title">${v.marca} ${v.modelo} ${v.ano||''}</div><div class="al-sub">${v.placa||'Sin placa'} · En taller</div></div></div>`).join('');}
-  if(needMaint.length){html+=`<div class="sec-hdr"><span class="sec-title">⚠️ Próximo Mantenimiento (${needMaint.length})</span></div>`+needMaint.map(v=>{const d=parseDate(v.ultimoMantenimiento);const dias=d?Math.floor((new Date()-d)/86400000):0;return`<div class="alert-banner" onclick="openVeh('${v.id}')"><i class="fas fa-triangle-exclamation"></i><div><div class="al-title">${v.marca} ${v.modelo} — Cambio de aceite</div><div class="al-sub">Hace ${dias} días sin mantenimiento · Último: ${v.ultimoMantenimiento}</div></div></div>`}).join('');}
-  el.innerHTML=html;
-}
+  actRentas.forEach(r => {
+    const today = new Date().toISOString().slice(0,10);
+    if (r.fechaFin && r.fechaFin <= today) {
+      html += `<div class="alert-banner red"><i class="fas fa-clock"></i><div><div class="al-title">Renta vencida: ${r.vehiculoNom||r.vehiculoId}</div><div class="al-sub">Debió finalizar el ${r.fechaFin} · ${fmtMoney(r.total)}</div></div></div>`;
+    } else {
+      html += `<div class="alert-banner green"><i class="fas fa-key"></i><div><div class="al-title">Renta activa: ${r.vehiculoNom||r.vehiculoId}</div><div class="al-sub">${r.cliente||"Sin cliente"} · ${r.fechaInicio} → ${r.fechaFin} · ${fmtMoney(r.total)}</div></div></div>`;
+    }
+  });
+  if (!html) html = emptyHTML("fa-bell-slash","Sin alertas","Todo está en orden");
+  el.innerHTML = html;
+};
 
-/* ══════════════════ HELPERS ══════════════════ */
-function fmtMoney(n) {
-  const num=toNum(n);
-  return '$'+num.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-}
-function toNum(v) { const n=parseFloat(v); return isNaN(n)?0:n; }
-function parseDate(s) { if(!s) return null; const d=new Date(s+'T12:00:00'); return isNaN(d)?null:d; }
-function stLabel(st){return{disponible:'Disponible',rentado:'Rentado',mantenimiento:'Mantenimiento'}[st]||st;}
-function emptyHTML(ico,t,s){return`<div class="empty"><div class="empty-ico"><i class="fas ${ico}"></i></div><div class="empty-t">${t}</div><div class="empty-s">${s}</div></div>`;}
-function val(id){const e=document.getElementById(id);return e?e.value.trim():'';}
-function setVal(id,v){const e=document.getElementById(id);if(e)e.value=v;}
-function setText(id,t){const e=document.getElementById(id);if(e)e.textContent=t;}
-function cap(s){return s?s.charAt(0).toUpperCase()+s.slice(1):s;}
+/* ══════════════════════════════════════
+  INITIAL DISPLAY
+══════════════════════════════════════ */
+showScreen("login");
 
-function animN(id,target){
-  const el=document.getElementById(id); if(!el) return;
-  let cur=0; const step=Math.ceil(target/20)||1;
-  const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=cur;if(cur>=target)clearInterval(t);},40);
-}
-
-function setLoading(btn,on){
-  if(on){btn.disabled=true;btn.innerHTML=`<div class="lring" style="width:20px;height:20px;border-width:2px"></div>`;}
-  else{btn.disabled=false;}
-}
-
-function closeModal(id){document.getElementById(id).style.display='none';}
-
-function toast(type,msg,iconHTML=''){
-  const c=document.getElementById('toast-c');
-  const t=document.createElement('div'); t.className=`toast ${type}`;
-  t.innerHTML=`${iconHTML}<span>${msg}</span>`; c.appendChild(t);
-  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateY(-8px)';t.style.transition='.3s';setTimeout(()=>t.remove(),300);},3200);
-}
-
-function hideLoader(){
-  const l=document.getElementById('gloader');
-  l.style.opacity='0';l.style.transition='opacity .4s';setTimeout(()=>l.remove(),400);
-}
-
-function setGreeting(){
-  const h=new Date().getHours();
-  setText('greeting',h<12?'Buenos días':h<18?'Buenas tardes':'Buenas noches');
-}
-
-function togglePass(){
-  const i=document.getElementById('l-pass'),ico=document.getElementById('eye-ico');
-  i.type=i.type==='password'?'text':'password';
-  ico.className=i.type==='password'?'fas fa-eye':'fas fa-eye-slash';
-}
-
-/* Ripple */
-document.addEventListener('click',e=>{
-  const btn=e.target.closest('.btn-p');
-  if(!btn) return;
-  const r=document.createElement('span'); r.className='ripple-el';
-  const rect=btn.getBoundingClientRect();
-  r.style.left=(e.clientX-rect.left)+'px'; r.style.top=(e.clientY-rect.top)+'px';
-  btn.appendChild(r); setTimeout(()=>r.remove(),700);
-});
-
-/* Enter key on login */
-document.addEventListener('keydown',e=>{
-  if(e.key==='Enter'&&document.getElementById('screen-login').classList.contains('active'))
-    document.getElementById('login-btn').click();
-});
 </script>
 </body>
 </html>
